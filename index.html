@@ -10,7 +10,7 @@
 
 	<body>
      <!--   <object data="https://www.kvg-kiel.de/internetservice/m.kvg" width="100%" height="100%"></object>  -->
-        <object data="https://www.kvg-kiel.de/fahrplan/echtzeit/" width="100%" height="100%"></object>
+        <object id="obj" data="https://www.kvg-kiel.de/fahrplan/echtzeit/" width="100%" height="100%"></object>
 	</body>
 	
 	
@@ -20,27 +20,22 @@
             
         height: 100vh;
         }
-        iframe {
+        #obj {
             padding: 0;
             margin: 0;
             border: 0;
 			overflow: hidden;
-			overflow-x: hidden;
+			overflow-x: scroll;
 			width: 100vw;
 		}
+		
+		
     </style>
 	
-	<script>
-		window.onscroll = function() {
+	<!--<script>
+		window.onmouseover = function() {
+            window.scrollX = 0;
+		}
 
-    var $body = $(document);
-    $body.bind('scroll', function() {
-        // "Disable" the horizontal scroll.
-        if ($body.scrollLeft() !== 0) {
-            $body.scrollLeft(0);
-        }
-    });
-
-}); 
-	</script>
+	</script>-->
 </html>
