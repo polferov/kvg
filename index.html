@@ -3,39 +3,40 @@
 <html>
 	<head>
 		<title>KVG Kiel | Echtzeitabfahrten</title>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8"/>
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<link rel="manifest" href="manifest.json">
+		<!--<script src="../jq/jquery-3.4.1.js"></script>-->
 	</head>
 
 	<body>
+		<h1><a href="dev">New Version In Development</a></h1>
      <!--   <object data="https://www.kvg-kiel.de/internetservice/m.kvg" width="100%" height="100%"></object>  -->
         <object id="obj" data="https://www.kvg-kiel.de/fahrplan/echtzeit/" width="100%" height="100%"></object>
+        <!--<iframe id="ifr" src="https://www.kvg-kiel.de/fahrplan/echtzeit/" width="100%" height="100%"></iframe>-->
+		
+		
 	</body>
 	
 	
 	<style>
         body {margin: 0;
             padding: 0;
-            
-        height: 100vh;
+            width: 100vw;
+        	height: 100vh;
+			overflow-x: hidden;
         }
+		
         #obj {
             padding: 0;
             margin: 0;
             border: 0;
 			overflow: hidden;
-			overflow-x: scroll;
+			overflow-x: hidden;
+			overflow-y: hidden;
 			width: 100vw;
 		}
 		
 		
     </style>
-	
-	<!--<script>
-		window.onmouseover = function() {
-            window.scrollX = 0;
-		}
-
-	</script>-->
 </html>
