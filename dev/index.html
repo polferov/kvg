@@ -3,14 +3,12 @@
 <head>
 <meta charset="utf-8">
 <title>KVG Echtzeit</title>
-	<script src="scripts/stops.js"></script>
-	<script src="scripts/loadstuff.js"></script>
-<!--	<script src="scripts/"></script>-->
+	<script src="../../jq/jquery-3.4.1.js"></script>
 </head>
 	
 	<div id="uiContainer">
 		<form>
-			<input id="uiStop" placeholder="stop"/>
+			<input type="search" id="uiStop" onKeyPress="uiStopOnChange()" placeholder="stop"/>
 		</form>
 	</div>
 	
@@ -18,4 +16,8 @@
 
 <body>
 </body>
+	
+	<script src="scripts/stops.js"></script>
+	<script src="scripts/loadstuff.js"></script>
+<!--	<script src="scripts/"></script>-->
 </html>

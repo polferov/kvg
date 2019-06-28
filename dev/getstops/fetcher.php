@@ -9,7 +9,7 @@
 	<script>
 		for(var i = 0; i < 57000; i++)
 			{
-				fetch("scan.php?nr=" + i);
+				fetch("scan.php?nr=" + i.toString());
 			}
 	</script>
 </body>
