@@ -7,31 +7,18 @@
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
 </head>
 	
+<body>
+	
 	<div id="uiContainer">
 		<form>
 			<input type="search" id="uiStop" onKeyPress="uiStopOnChange()" placeholder="stop"/>
 		</form>
 	</div>
 	
-	<div id="infoContainer"></div>
-
-<body>
-</body>
-	<script>
-		$.ajax({
-			url: "https://kirill.cf/getSiteContent.php?url=https://google.com",
-			
-			sucsess: function(res){
-				console.log("sucsess");
-				console.log(res);
-			},
-			
-			error: function(e){
-				console.log(e);
-			}
-		});
-	</script>
+	<div id="infoContainer"/>
 
 	<script src="scripts/stops.js"></script>
 	<script src="scripts/loadstuff.js"></script>
+	
+</body>
 </html>
