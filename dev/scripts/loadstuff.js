@@ -1,5 +1,6 @@
 var gsc = "http://kirill.cf/getSiteContent.php?url=";
 var infoContainer = document.getElementById("infoContainer");
+var stopSearchAutocompleteUL = document.getElementById("autocomplete");
 var kvg = {
 	stopInfoURL: "https://www.kvg-kiel.de/internetservice/services/stopInfo/stop?stop=",
 	queryURL: "https://www.kvg-kiel.de/internetservice/services/lookup/autocomplete?query=",
@@ -45,15 +46,15 @@ $.ajax({
 
 //ui
 
-document.getElementById("uiStop").onkeypress = function(e){
-	var lmnt = document.getElementById("uiStop");
-	var ss = lmnt.selectionStart;
-	var cntnt = lmnt.value.slice(0, ss) + e.key + lmnt.value.substr(ss);
-	console.log(cntnt);
+document.getElementById("uiStop").addEventListener("input", function(e){
+	var val = e.srcElement.value;
+	var stps = filterStops(val);
+	var LIs = generateStopLIs(stps);
+	stopSearchAutocompleteUL.innerHTML = null;
+	for(var i in LIs)
+		stopSearchAutocompleteUL.appendChild(LIs[i]);
 	
-	console.log(filterStops(cntnt));
-	
-};
+});
 
 function filterStops(filter)
 {
@@ -65,8 +66,8 @@ function filterStops(filter)
 		if(stops[i].passengerName.toLowerCase().indexOf(filter.toLowerCase()) == 0)
 			a.push(stops[i]);
 	
-	if(filter.length > 2)
-		for(var i = 0; i < stops.length; i++)
+	
+	for(var i = 0; i < stops.length; i++)
 		if(stops[i].passengerName.toLowerCase().indexOf(filter.toLowerCase()) > 0)
 			b.push(stops[i]);
 	
@@ -75,12 +76,43 @@ function filterStops(filter)
 	return c;
 }
 
-//loading stuff --------------------------------------------------------------------------------------------------------
 
+function generateStopLIs(stps){
+	var LIs = [];
+	var starts = stps[0];
+	var contains = stps[1];
+	
+	for(var i in starts)
+		{
+			var lmnt = starts[i];
+			var li = document.createElement("li");
+			li.innerHTML = lmnt.passengerName;
+			li.setAttribute("stopNr", lmnt.stopNr);
+			li.setAttribute("stopID", lmnt.id);
+			LIs.push(li);
+		}
+	
+	if(contains != null && contains.length > 0)
+		{
+			if(starts != null && starts.length > 0)
+				LIs.push(document.createElement("hr"));
+			for(var i in contains)
+			{
+				var lmnt = contains[i];
+				var li = document.createElement("li");
+				li.innerHTML = lmnt.passengerName;
+				li.setAttribute("stopNr", lmnt.stopNr);
+				li.setAttribute("stopID", lmnt.id);
+				li.addEventListener("click", liClick);
+				LIs.push(li);
+			}
+		}
+	console.log(stps)
+	console.log(LIs);
+	return(LIs);
+	
+}
 
-
-
-
-
-
-
+function liClick(e){
+	alert("test");
+}
