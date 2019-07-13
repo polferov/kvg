@@ -7,3 +7,4 @@ var kvg = {
 		departure: "https://www.kvg-kiel.de//internetservice/services/passageInfo/stopPassages/stop?mode=departure&stop="
 	}
 };
+
