@@ -1,6 +1,7 @@
 var gsc = "http://kirill.cf/getSiteContent.php?url=";
 var infoContainer = document.getElementById("infoContainer");
 var stopSearchAutocompleteUL = document.getElementById("autocomplete");
+var activeStop = null;
 var kvg = {
 	stopInfoURL: "https://www.kvg-kiel.de/internetservice/services/stopInfo/stop?stop=",
 	queryURL: "https://www.kvg-kiel.de/internetservice/services/lookup/autocomplete?query=",
@@ -10,23 +11,28 @@ var kvg = {
 		departure: "https://www.kvg-kiel.de//internetservice/services/passageInfo/stopPassages/stop?mode=departure&stop="
 	},
 	get: {
-		stopInfo: function(stop){return contentOf(kvg.routeInfoURL+stop);},
+		stopInfo: function(stop){return contentOf(kvg.routeInfoURL+stop.toString());},
 	passageInfo: {
-		arrival: function(stop){return contentOf(kvg.passageInfoURLs.arrival+stop);},
-		departure: function(stop){return contentOf(kvg.passageInfoURLs.departure+stop);}
+		arrival: function(stop){return contentOf(kvg.passageInfoURLs.arrival+stop.toString());},
+		departure: function(stop){return contentOf(kvg.passageInfoURLs.departure+stop.toString());}
 	},
 	routeInfo: function(){return contentOf(kvg.routeInfoURL)}
 	}
 };
 
-function contentOf(url){
-	var c;
-	$.ajax({
-		url: gsc + encodeURIComponent(url),
-		success: function(res){c = res;},
+function contentOf(_url){
+//	return $.getJSON(gsc + encodeURIComponent(_url));
+	
+	return $.ajax({
+		url: gsc + encodeURIComponent(_url),
+		dataType: "json",
+		async: false,
+		success: function(res){c = res; return res;},
 		error: function(e){console.log(e);}
-	});
-	return c;
+	}).responseJSON;
+	//console.log(c, _url);
+//	console.log(c.responseText);
+//	return c;
 }
 
 //Get stops----------------------------------------------------------
@@ -35,7 +41,7 @@ $.ajax({
 	url: "stops.json",
 	success: function(res){
 		//console.log(res);
-		stops = res;
+		stops = res.sort((a,b) => (a.passengerName > b.passengerName) ? 1 : ((b.passengerName > a.passengerName) ? -1 : 0));
 		console.log(stops);
 	},
 	error: function(e){
@@ -45,6 +51,8 @@ $.ajax({
 });
 
 //ui
+
+document.getElementById("autocomplete").onclick = acUlClick;
 
 document.getElementById("uiStop").addEventListener("input", function(e){
 	var val = e.srcElement.value;
@@ -59,6 +67,9 @@ document.getElementById("uiStop").addEventListener("input", function(e){
 function filterStops(filter)
 {
 	"use strict";
+	if(filter == "")
+		return [];
+	
 	var a = [];
 	var b = [];
 	var c = [];
@@ -103,7 +114,6 @@ function generateStopLIs(stps){
 				li.innerHTML = lmnt.passengerName;
 				li.setAttribute("stopNr", lmnt.stopNr);
 				li.setAttribute("stopID", lmnt.id);
-				li.addEventListener("click", liClick);
 				LIs.push(li);
 			}
 		}
@@ -113,6 +123,26 @@ function generateStopLIs(stps){
 	
 }
 
-function liClick(e){
-	alert("test");
+var stopRefresh = setInterval(function(){
+	infoContainer.innerHTML = null;
+	infoContainer.appendChild();
+}, 1000);
+
+function acUlClick(e){
+	console.log(kvg.get.passageInfo.arrival("1312"));
+	activeStop = e.target.getAttribute("stopnr");
+}
+
+function generateInfoUl(Obj){
+	var ul = document.createElement("ul");
+	Obj.actual.forEach(function(lmnt){
+		var li = document.createElement("li");
+		var pt = lmnt.patternText;
+		var dir = lmnt.direction;
+		var art = lmnt.actualRelativeTime;
+		var at = lmnt.actualTime;
+		var mt = lmnt.mixedTime;
+		var pt = lmnt.plannedTime;
+		
+	});
 }
