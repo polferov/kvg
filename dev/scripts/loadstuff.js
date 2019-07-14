@@ -132,8 +132,8 @@ var stopRefresh = setInterval(function(){
 }, 1000);
 
 function acUlClick(e){
-	alert("Test");
-	console.log(kvg.get.passageInfo.arrival("1312"));
+	document.getElementById("iuStop").value = e.target.innerHTML;
+//	console.log(kvg.get.passageInfo.arrival("1312"));
 	activeStop = e.target.getAttribute("stopnr");
 }
 
