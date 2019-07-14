@@ -124,8 +124,10 @@ function generateStopLIs(stps){
 }
 
 var stopRefresh = setInterval(function(){
-	infoContainer.innerHTML = null;
-	infoContainer.appendChild();
+	//infoContainer.innerHTML = null;
+	if(activeStop == null || activeStop < 0)
+		return;
+	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;
 }, 1000);
 
 function acUlClick(e){
@@ -135,14 +137,33 @@ function acUlClick(e){
 
 function generateInfoUl(Obj){
 	var ul = document.createElement("ul");
-	Obj.actual.forEach(function(lmnt){
+	Obj.actual.sort((a,b) => a.actualRelativeTime != b.actualRelativeTime ? a.actualRelativeTime - b.actualRelativeTime : (a.patternText != b.patternText ? a.patternText - b.patternText : a.direction < b.direction)).forEach(function(lmnt){
+		
 		var li = document.createElement("li");
-		var pt = lmnt.patternText;
+		ul.appendChild(li);
+		var d = document.createElement("div");
+		li.appendChild(d);
+		
+		var ptxt = lmnt.patternText;
 		var dir = lmnt.direction;
 		var art = lmnt.actualRelativeTime;
 		var at = lmnt.actualTime;
 		var mt = lmnt.mixedTime;
-		var pt = lmnt.plannedTime;
+		var ptme = lmnt.plannedTime;
+		var stts = lmnt.status;
+		
+		
+		var pte = document.createElement("p");
+		pte.classList.add("busTitle");
+		pte.innerHTML = ptxt + " --> " + dir;
+		d.appendChild(pte);
+		
+		var ar = document.createElement("p");
+		ar.innerHTML = art;
+		d.appendChild(ar);
+		
+		
 		
 	});
+	return ul;
 }

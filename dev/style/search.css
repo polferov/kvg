@@ -20,7 +20,7 @@
 	font-family: "Open Sans",Arial,Helvetica,sans-serif;
 }
 
-#uiStopSearch ul {
+#autocomplete {
 	background: #aaa;
 	width: calc(100% - 4px);
 	border: 2px solid #aaa;
@@ -35,4 +35,8 @@
 
 #uiStopSearch input {
 	border: 2px inset;
+}
+
+#uiStopSearch #autocomplete {
+	display: none;
 }
