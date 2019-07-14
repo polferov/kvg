@@ -53,6 +53,7 @@ $.ajax({
 //ui
 
 document.getElementById("autocomplete").onclick = acUlClick;
+document.getElementById("autocomplete").onTouchEnd = acUlClick;
 
 document.getElementById("uiStop").addEventListener("input", function(e){
 	var val = e.srcElement.value;
