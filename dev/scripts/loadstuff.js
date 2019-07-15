@@ -22,6 +22,37 @@ var kvg = {
 	}
 };
 
+var locstrg = {
+	name: "history",
+	count: 10,
+	get: function(){
+		return JSON.parse(localStorage.getItem(this.name));
+	},
+	
+	add: function(lmnt){
+		var curr = this.get();
+		if(curr == null)
+			curr = [];
+		curr = curr.filter((l) => l.stopNr != lmnt.stopNr);
+		curr.push(lmnt);
+		if(curr.length > this.count)
+			{
+				curr = curr.reverse();
+				curr.length = this.count;
+				curr = curr.reverse();
+			}
+		return this.set(curr);
+	},
+	
+	set: function(_Obj){
+		return localStorage.setItem(this.name, JSON.stringify(_Obj));
+	},
+	
+	clear: function(){
+		return localStorage.setItem(this.name, null);
+	}
+}
+
 function contentOf(_url){
 //	return $.getJSON(gsc + encodeURIComponent(_url));
 	
@@ -57,7 +88,10 @@ $.ajax({
 document.getElementById("autocomplete").onclick = acUlClick;
 document.getElementById("autocomplete").onTouchEnd = acUlClick;
 
-document.getElementById("uiStop").addEventListener("input", function(e){
+document.getElementById("uiStop").addEventListener("input", onUiInput);
+document.getElementById("uiStop").addEventListener("focus", onUiInput);
+
+function onUiInput(e){
 	var val = e.srcElement.value;
 	var stps = filterStops(val);
 	var LIs = generateStopLIs(stps);
@@ -65,13 +99,15 @@ document.getElementById("uiStop").addEventListener("input", function(e){
 	for(var i in LIs)
 		stopSearchAutocompleteUL.appendChild(LIs[i]);
 	
-});
+}
 
 function filterStops(filter)
 {
 	"use strict";
 	if(filter == "")
-		return [];
+		return [locstrg.get().reverse(), null] || [];
+	
+	console.log(filter);
 	
 	var a = [];
 	var b = [];
@@ -105,6 +141,7 @@ function generateStopLIs(stps){
 			li.innerHTML = lmnt.passengerName;
 			li.setAttribute("stopNr", lmnt.stopNr);
 			li.setAttribute("stopID", lmnt.id);
+			li.setAttribute("lmnt", JSON.stringify(lmnt));
 			LIs.push(li);
 		}
 	
@@ -119,6 +156,7 @@ function generateStopLIs(stps){
 				li.innerHTML = lmnt.passengerName;
 				li.setAttribute("stopNr", lmnt.stopNr);
 				li.setAttribute("stopID", lmnt.id);
+				li.setAttribute("lmnt", JSON.stringify(lmnt));
 				LIs.push(li);
 			}
 		}
@@ -139,8 +177,12 @@ var stopRefresh = setInterval(function(){
 
 function acUlClick(e){
 	$("#uiStop").val(e.target.innerHTML);
+	
 //	console.log(kvg.get.passageInfo.arrival("1312"));
 	activeStop = e.target.getAttribute("stopnr");
+	locstrg.add(JSON.parse(e.target.getAttribute("lmnt")));
+//	alert("test");
+	console.log(locstrg.get());
 	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;
 }
 
@@ -183,3 +225,6 @@ function generateInfoUl(Obj){
 	});
 	return ul;
 }
+
+//locstrg.clear();
+console.log(locstrg.get());
