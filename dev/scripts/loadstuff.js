@@ -216,9 +216,16 @@ function generateInfoUl(Obj){
 		pte.innerHTML = ptxt + " --> " + dir;
 		d.appendChild(pte);
 		
-		var ar = document.createElement("p");
-		ar.innerHTML = art;
-		d.appendChild(ar);
+		var tme = document.createElement("div");
+		tme.classList.add("timeContainer");
+		var sece = document.createElement("span");
+		var verspe = document.createElement("span");
+		sece.innerHTML = art;
+		var td = timeDiffInMin(ptme, at);
+		verspe.innerHTML = td != 0 ? td : "";
+		tme.appendChild(sece);
+		tme.appendChild(verspe);
+		d.appendChild(tme);
 		
 		
 		
@@ -226,5 +233,19 @@ function generateInfoUl(Obj){
 	return ul;
 }
 
-//locstrg.clear();
-console.log(locstrg.get());
+
+function timeDiffInMin(a, b){
+	a = timeStringConvert(a);
+	b = timeStringConvert(b);
+	a = a[0]*60+a[1];
+	b = b[0]*60+b[1];
+	d = b-a;
+	if(d<0)
+		d+=20*60;
+	return d;
+}
+
+function timeStringConvert(t) {
+	var ta = t.split(":");
+	return ta;
+}
