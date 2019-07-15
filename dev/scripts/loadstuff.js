@@ -1,3 +1,5 @@
+
+
 var gsc = "http://kirill.cf/getSiteContent.php?url=";
 var infoContainer = document.getElementById("infoContainer");
 var stopSearchAutocompleteUL = document.getElementById("autocomplete");
@@ -89,6 +91,8 @@ function filterStops(filter)
 }
 
 
+
+
 function generateStopLIs(stps){
 	var LIs = [];
 	var starts = stps[0];
@@ -124,9 +128,11 @@ function generateStopLIs(stps){
 	
 }
 
+
 var stopRefresh = setInterval(function(){
 	//infoContainer.innerHTML = null;
-	if(activeStop == null || activeStop < 0)
+//	console.log("test");
+	if(activeStop == null)
 		return;
 	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;
 }, 1000);
@@ -135,9 +141,17 @@ function acUlClick(e){
 	$("#uiStop").val(e.target.innerHTML);
 //	console.log(kvg.get.passageInfo.arrival("1312"));
 	activeStop = e.target.getAttribute("stopnr");
+	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;
 }
 
 function generateInfoUl(Obj){
+	console.log(Obj);
+	if(! Obj.actual[0])
+		{
+			var err = document.createElement("p");
+			err.innerHTML = "no current Information";
+			return err;
+		}
 	var ul = document.createElement("ul");
 	Obj.actual.sort((a,b) => a.actualRelativeTime != b.actualRelativeTime ? a.actualRelativeTime - b.actualRelativeTime : (a.patternText != b.patternText ? a.patternText - b.patternText : a.direction < b.direction)).forEach(function(lmnt){
 		
