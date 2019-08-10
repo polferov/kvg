@@ -235,17 +235,21 @@ function generateInfoUl(Obj){
 
 
 function timeDiffInMin(a, b){
+	if(!a || !b)
+		return 0;
 	a = timeStringConvert(a);
 	b = timeStringConvert(b);
 	a = a[0]*60+a[1];
 	b = b[0]*60+b[1];
 	d = b-a;
-	//if(d<0)
-	//	d+=20*60;
+	if(d<(24*60))
+			d+=20*60;
 	return d;
 }
 
 function timeStringConvert(t) {
+	if(!t)
+		return [0,0];
 	var ta = t.split(":");
 	return ta;
 }
