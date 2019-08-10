@@ -1,6 +1,6 @@
 
 
-var gsc = "http://kirill.cf/getSiteContent.php?url=";
+var gsc = "http://tools.thekirillproject.cf/getSiteContent.php?url=";
 var infoContainer = document.getElementById("infoContainer");
 var stopSearchAutocompleteUL = document.getElementById("autocomplete");
 var activeStop = null;
