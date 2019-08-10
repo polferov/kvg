@@ -242,8 +242,8 @@ function timeDiffInMin(a, b){
 	a = a[0]*60+a[1];
 	b = b[0]*60+b[1];
 	d = b-a;
-	if(d<(24*60))
-			d+=20*60;
+	if(d<(-12*60))
+			d+=24*60;
 	return d;
 }
 
