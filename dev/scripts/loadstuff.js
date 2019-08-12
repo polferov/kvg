@@ -241,7 +241,7 @@ function timeDiffInMin(a, b){
 	b = timeStringConvert(b);
 	a = a[0]*60+a[1];
 	b = b[0]*60+b[1];
-	d = b-a;
+	var d = b-a;
 	//if(d<(-12*60))
 	//		d+=24*60;
 	return d;
