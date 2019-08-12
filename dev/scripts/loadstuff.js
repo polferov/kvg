@@ -237,8 +237,8 @@ function generateInfoUl(Obj){
 function timeDiffInMin(a, b){
 	if(!a || !b)
 		return 0;
-	a = timeStringConvert(a);
-	b = timeStringConvert(b);
+	a = timeStringToMin(a);
+	b = timeStringToMin(b);
 	a = a[0]*60+a[1];
 	b = b[0]*60+b[1];
 	var d = b-a;
@@ -247,9 +247,8 @@ function timeDiffInMin(a, b){
 	return d;
 }
 
-function timeStringConvert(t) {
+function timeStringToMin(t) {
 	if(!t)
 		return [0,0];
-	var ta = t.split(":");
-	return ta;
+	return t.split(“:“);
 }
