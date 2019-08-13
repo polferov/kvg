@@ -250,5 +250,5 @@ function timeDiffInMin(a, b){
 function timeStringToMin(t) {
 	if(!t)
 		return [0,0];
-	return t.split(“:“);
+	return t.split(":");
 }
