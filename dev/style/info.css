@@ -25,3 +25,11 @@
 #infoUL .busTitle {
 	margin: 3px;
 }
+
+.actualTime {
+	margin-right: 10px !important;
+}
+
+.overwritten {
+	text-decoration: line-through;
+}

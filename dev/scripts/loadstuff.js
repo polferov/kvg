@@ -223,9 +223,26 @@ function generateInfoUl(Obj){
 		tme.classList.add("timeContainer");
 		var sece = document.createElement("span");
 		var verspe = document.createElement("span");
+		var fixedTimeDiv = document.createElement("div");
+		fixedTimeDiv.classList.add("fixedTimeDiv");
+		
+		var pte = document.createElement("span");
+		pte.innerHTML = ptme;
+		pte.classList.add("actualTime");
+		fixedTimeDiv.appendChild(pte);
+		if(ptme != at)
+			{
+				var ate = document.createElement("span");
+				ate.innerHTML = at;
+				ate.classList.add("actualTime");
+				pte.classList.add("overwritten");
+				fixedTimeDiv.appendChild(ate);
+			}
+		
 		sece.innerHTML = art;
 		var td = timeDiffInMin(ptme, at);
 		verspe.innerHTML = td != 0 ? td : "";
+		d.appendChild(fixedTimeDiv);
 		tme.appendChild(sece);
 		tme.appendChild(verspe);
 		d.appendChild(tme);
