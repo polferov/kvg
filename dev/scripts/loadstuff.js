@@ -259,9 +259,12 @@ function timeDiffInMin(a, b){
 		return 0;
 	a = timeStringToMin(a);
 	b = timeStringToMin(b);
-	a = a[0]*60+a[1];
-	b = b[0]*60+b[1];
+	console.log(a);
+	console.log(b);
+	a = parseInt(a[0])*60+parseInt(a[1]);
+	b = parseInt(b[0])*60+parseInt(b[1]);
 	var d = b-a;
+	console.log(d);
 	//if(d<(-12*60))
 	//		d+=24*60;
 	return d;

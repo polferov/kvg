@@ -16,5 +16,6 @@
         }
     ],
   "background_color": "#C11919",
-  "theme_color": "#C11919"
+  "theme_color": "#C11919",
+	"start_url": "/dev"
 }
