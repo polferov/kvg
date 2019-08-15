@@ -1,4 +1,4 @@
-
+var timeInMin = false;
 
 var gsc = "http://kirill.cf/getSiteContent.php?url=";
 var infoContainer = document.getElementById("infoContainer");
@@ -239,7 +239,7 @@ function generateInfoUl(Obj){
 				fixedTimeDiv.appendChild(ate);
 			}
 		
-		sece.innerHTML = toString(Math.floor(art/60)) + ':' + toString(art%60);
+		sece.innerHTML = timeInMin ? Math.floor(art/60) + ':' + Math.abs(art%60) : art;
 		var td = timeDiffInMin(ptme, at);
 		verspe.innerHTML = td != 0 ? td : "";
 		d.appendChild(fixedTimeDiv);
@@ -259,8 +259,6 @@ function timeDiffInMin(a, b){
 		return 0;
 	a = timeStringToMin(a);
 	b = timeStringToMin(b);
-	console.log(a);
-	console.log(b);
 	a = parseInt(a[0])*60+parseInt(a[1]);
 	b = parseInt(b[0])*60+parseInt(b[1]);
 	var d = b-a;
