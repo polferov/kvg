@@ -16,3 +16,16 @@ document.addEventListener("click", function(e){
 	if(! document.getElementById("uiStopSearch").contains(t))
 		document.getElementById("autocomplete").style.display = "none";
 });
+
+
+const setNetworkStatus = {
+	OK: function () {
+		document.getElementById("networkOK").style.display = "inline-block";
+		document.getElementById("networkErr").style.display = "none";
+	},
+	
+	Err: function () {
+		document.getElementById("networkErr").style.display = "inline-block";
+		document.getElementById("networkOK").style.display = "none";
+	}
+}

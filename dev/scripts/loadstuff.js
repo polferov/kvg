@@ -60,8 +60,8 @@ function contentOf(_url){
 		url: gsc + encodeURIComponent(_url),
 		dataType: "json",
 		async: false,
-		success: function(res){c = res; return res;},
-		error: function(e){console.log(e);}
+		success: function(res){c = res; setNetworkStatus.OK(); return res;},
+		error: function(e){console.log(e); setNetworkStatus.Err();}
 	}).responseJSON;
 	//console.log(c, _url);
 //	console.log(c.responseText);
@@ -76,10 +76,12 @@ $.ajax({
 		//console.log(res);
 		stops = res.sort((a,b) => (a.passengerName > b.passengerName) ? 1 : ((b.passengerName > a.passengerName) ? -1 : 0));
 		console.log(stops);
+		setNetworkStatus.OK();
 	},
 	error: function(e){
 		alert("Something went wrong");
 		console.log(JSON.parse(e.responseText));
+		setNetworkStatus.Err();
 	}
 });
 
