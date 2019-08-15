@@ -197,6 +197,7 @@ function generateInfoUl(Obj){
 			return err;
 		}
 	var ul = document.createElement("ul");
+	ul.id = "infoUL";
 	Obj.actual.sort((a,b) => a.actualRelativeTime != b.actualRelativeTime ? a.actualRelativeTime - b.actualRelativeTime : (a.patternText != b.patternText ? a.patternText - b.patternText : a.direction < b.direction)).forEach(function(lmnt){
 		
 		var li = document.createElement("li");
