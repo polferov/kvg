@@ -14,7 +14,7 @@ font-family: Arial;
 	height: 100%;
 }
 
-#settings {
+#settings, #settings * {
 margin: 10px;
 height: 24px;
 }
