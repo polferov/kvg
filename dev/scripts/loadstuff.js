@@ -251,7 +251,7 @@ function generateInfoUl(Obj){
 				fixedTimeDiv.appendChild(ate);
 			}
 		
-		sece.innerHTML = settings.get(settings.convertTime) ? Math.floor(art/60) + ':' + (Math.abs(art%60).length == 2 ? Math.abs(art%60) : (Math.abs(art%60).length == 1 ? "0" + Math.abs(art%60) : (Math.abs(art%60).length == 0 ? "00" : "error"))) : art;
+		sece.innerHTML = settings.get(settings.convertTime) ? Math.floor(art/60) + ':' + (toString(Math.abs(art%60)).length == 2 ? toString(Math.abs(art%60)) : (toString(Math.abs(art%60)).length == 1 ? "0" + toString(Math.abs(art%60)) : (toString(Math.abs(art%60)).length == 0 ? "00" : "error"))) : art;
 		var td = timeDiffInMin(ptme, at);
 		verspe.innerHTML = td != 0 ? td : "";
 		d.appendChild(fixedTimeDiv);
