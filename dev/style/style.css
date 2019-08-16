@@ -13,3 +13,8 @@ font-family: Arial;
 	display: none;
 	height: 100%;
 }
+
+#settings {
+margin: 10px;
+height: 24px;
+}
