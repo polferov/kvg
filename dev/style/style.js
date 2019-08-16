@@ -29,3 +29,6 @@ const setNetworkStatus = {
 		document.getElementById("networkOK").style.display = "none";
 	}
 }
+
+if(settings.get(!settings.hideBackToNormal))
+	document.getElementById("backToNormal").style.display = "block";

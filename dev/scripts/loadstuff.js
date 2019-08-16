@@ -239,7 +239,7 @@ function generateInfoUl(Obj){
 				fixedTimeDiv.appendChild(ate);
 			}
 		
-		sece.innerHTML = timeInMin ? Math.floor(art/60) + ':' + Math.abs(art%60) : art;
+		sece.innerHTML = settings.get(settings.convertTime) ? Math.floor(art/60) + ':' + Math.abs(art%60) : art;
 		var td = timeDiffInMin(ptme, at);
 		verspe.innerHTML = td != 0 ? td : "";
 		d.appendChild(fixedTimeDiv);

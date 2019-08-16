@@ -9,11 +9,25 @@
 
 <body>
 	<h2>Settings</h2>
-	<span>Test</span>
-	<label class="switch">
-		<input type="checkbox">
-		<span class="slider round"></span>
-	</label>
+	
+	<div class="setting">
+		<span>Show Back To Normal Link</span>
+		<label class="switch">
+			<input type="checkbox" setting="hideBackToNormal" class="settingsCb">
+			<span class="slider round"></span>
+		</label>
+	</div>
+	
+	<div class="setting">
+		<span>Time as min:sec</span>
+		<label class="switch">
+			<input type="checkbox" setting="convertTime" class="settingsCb">
+			<span class="slider round"></span>
+		</label>
+	</div>
+	
 	
 </body>
+	<script src="scripts/settingsclass.js"></script>
+	<script src="scripts/settings.js"></script>
 </html>
