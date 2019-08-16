@@ -3,6 +3,7 @@ var settings = {
 	name: "settings",
 	hideBackToNormal: "hideBackToNormal",
 	convertTime: "convertTime",
+	returnToLast: "returnToLast",
 	
 	get: function (property) {
 		if(JSON.parse(localStorage.getItem(name)))

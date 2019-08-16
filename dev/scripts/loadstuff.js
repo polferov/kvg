@@ -53,6 +53,18 @@ var locstrg = {
 	}
 }
 
+function init(){
+	if(!settings.get(settings.returnToLast))
+		return;
+	var hist = locstrg.get();
+	if(hist)
+		if(hist.length > 0)
+			{
+				activeStop = hist.reverse()[0].stopNr || -1;
+			}
+}
+init();
+
 function contentOf(_url){
 //	return $.getJSON(gsc + encodeURIComponent(_url));
 	
