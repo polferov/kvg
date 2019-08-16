@@ -6,6 +6,7 @@ var settings = {
 	returnToLast: "returnToLast",
 	fontSizeMultiplikatorSearch: "fontSizeMultiplikatorSearch",
 	fontSizeMultiplikatorInfo: "fontSizeMultiplikatorInfo",
+	fontSizeMultiplikatorSearchAutocomplete: "fontSizeMultiplikatorSearchAutocomplete",
 	
 	get: function (property) {
 		if(JSON.parse(localStorage.getItem(settings.name)))
