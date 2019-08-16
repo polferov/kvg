@@ -32,3 +32,12 @@ const setNetworkStatus = {
 
 if(!settings.get(settings.hideBackToNormal))
 	document.getElementById("backToNormal").style.display = "block";
+
+//document.getElementById('uiContainer').style.cssText += "font-size: 1000px;";
+
+if(settings.get(settings.fontSizeMultiplikatorSearch))
+	document.getElementById('uiContainer').style.cssText += "font-size: " + settings.get(settings.fontSizeMultiplikatorSearch) + "em;";
+
+if(settings.get(settings.fontSizeMultiplikatorInfo))
+	document.getElementById('infoContainer').style.cssText += "font-size: " + settings.get(settings.fontSizeMultiplikatorInfo) + "em;";
+

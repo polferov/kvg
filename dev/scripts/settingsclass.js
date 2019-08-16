@@ -4,6 +4,8 @@ var settings = {
 	hideBackToNormal: "hideBackToNormal",
 	convertTime: "convertTime",
 	returnToLast: "returnToLast",
+	fontSizeMultiplikatorSearch: "fontSizeMultiplikatorSearch",
+	fontSizeMultiplikatorInfo: "fontSizeMultiplikatorInfo",
 	
 	get: function (property) {
 		if(JSON.parse(localStorage.getItem(name)))

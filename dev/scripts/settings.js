@@ -1,12 +1,25 @@
-var inputs = document.getElementsByClassName("settingsCb");
+var cbs = document.getElementsByClassName("settingsCb");
+var nrs = document.getElementsByClassName("settingsNr");
 
-for(var i = 0; i < inputs.length; i++)
-	inputs[i].addEventListener("change", cbOnChange);
+for(var i = 0; i < cbs.length; i++)
+	cbs[i].addEventListener("change", cbOnChange);
+
+for(var i = 0; i < nrs.length; i++)
+	{
+		nrs[i].addEventListener("change", nrOnChange);
+		nrs[i].value = settings.get(settings.fontSizeMultiplikator) || "1";
+	}
 
 
 
 function cbOnChange(e){
 	var sender = e.target;
 	settings.set(sender.getAttribute("setting"), sender.checked);
+	
+}
+
+function nrOnChange(e){
+	var sender = e.target;
+	settings.set(sender.getAttribute("setting"), sender.value);
 	
 }
