@@ -30,5 +30,5 @@ const setNetworkStatus = {
 	}
 }
 
-if(settings.get(!settings.hideBackToNormal))
+if(!settings.get(settings.hideBackToNormal))
 	document.getElementById("backToNormal").style.display = "block";
