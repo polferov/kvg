@@ -1,13 +1,15 @@
 var cbs = document.getElementsByClassName("settingsCb");
 var nrs = document.getElementsByClassName("settingsNr");
 
-for(var i = 0; i < cbs.length; i++)
+for(var i = 0; i < cbs.length; i++){
 	cbs[i].addEventListener("change", cbOnChange);
+	cbs[i].checked = settings.get(cbs[i].getAttribute("setting")) || false;
+}
 
 for(var i = 0; i < nrs.length; i++)
 	{
 		nrs[i].addEventListener("change", nrOnChange);
-		nrs[i].value = settings.get(settings.fontSizeMultiplikator) || "1";
+		nrs[i].value = settings.get(nrs[i].getAttribute("setting")) || "1";
 	}
 
 

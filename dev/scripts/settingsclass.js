@@ -8,14 +8,14 @@ var settings = {
 	fontSizeMultiplikatorInfo: "fontSizeMultiplikatorInfo",
 	
 	get: function (property) {
-		if(JSON.parse(localStorage.getItem(name)))
-			return JSON.parse(localStorage.getItem(name))[property] || null;
+		if(JSON.parse(localStorage.getItem(settings.name)))
+			return JSON.parse(localStorage.getItem(settings.name))[property] || null;
 		return null;
 	},
 	set: function (property, value) {
-		var props = JSON.parse(localStorage.getItem(name)) || {};
+		var props = JSON.parse(localStorage.getItem(settings.name)) || {};
 		props[property] = value;
 		console.log(props);
-		localStorage.setItem(name, JSON.stringify(props));
+		localStorage.setItem(settings.name, JSON.stringify(props));
 	}
 }
