@@ -6,6 +6,10 @@
 	padding: 0;
 }
 
+#uiStop {
+	font-size: 1.25em;
+}
+
 #uiStopSearch {
 	padding: 0 10px;
 	position: relative;
