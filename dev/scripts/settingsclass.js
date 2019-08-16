@@ -9,6 +9,8 @@ var settings = {
 	fontSizeMultiplikatorSearchAutocomplete: "fontSizeMultiplikatorSearchAutocomplete",
 	
 	get: function (property) {
+		if(!property)
+			return JSON.parse(localStorage.getItem(settings.name)) || null;
 		if(JSON.parse(localStorage.getItem(settings.name)))
 			return JSON.parse(localStorage.getItem(settings.name))[property] || null;
 		return null;
