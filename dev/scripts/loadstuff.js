@@ -61,7 +61,7 @@ function init(){
 		if(hist.length > 0)
 			{
 				activeStop = hist.reverse()[0].stopNr || -1;
-document.getElementById('uiStop').input = hist.reverse()[0].passengerName;
+document.getElementById('uiStop').value = hist.reverse()[0].passengerName;
 			}
 }
 init();
