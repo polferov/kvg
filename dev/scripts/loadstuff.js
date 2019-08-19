@@ -61,6 +61,7 @@ function init(){
 		if(hist.length > 0)
 			{
 				activeStop = hist.reverse()[0].stopNr || -1;
+document.getElementById('uiStop').value = hist.reverse()[0].passengerName;
 			}
 }
 init();
@@ -256,7 +257,7 @@ function generateInfoUl(Obj){
 				fixedTimeDiv.appendChild(ate);
 			}
 		
-		sece.innerHTML = settings.get(settings.convertTime) ? Math.floor(art/60) + ':' + Math.abs(art%60) : art;
+		sece.innerHTML = settings.get(settings.convertTime) ? Math.floor(art/60) + ':' + (Math.abs(art%60).toString().length == 2 ? Math.abs(art%60).toString() : (Math.abs(art%60).toString().length == 1 ? "0" + Math.abs(art%60).toString() : (Math.abs(art%60).toString().length == 0 ? "00" : "error"))) : art;
 		var td = timeDiffInMin(ptme, at);
 		verspe.innerHTML = td != 0 ? td : "";
 		d.appendChild(fixedTimeDiv);
