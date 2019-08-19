@@ -73,7 +73,12 @@ function contentOf(_url){
 		dataType: "json",
 		async: false,
 		success: function(res){c = res; setNetworkStatus.OK(); return res;},
-		error: function(e){console.log(e); setNetworkStatus.Err();}
+		error: function(e){console.log(e); 
+			if(!navigator.onLine)
+				setNetworkStatus.Err();
+			else
+				
+						  }
 	}).responseJSON;
 	//console.log(c, _url);
 //	console.log(c.responseText);
