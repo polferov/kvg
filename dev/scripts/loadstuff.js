@@ -78,7 +78,7 @@ function contentOf(_url){
 			if(!navigator.onLine)
 				setNetworkStatus.Err();
 			else
-				
+				infoContainer.innerHTML = infoContainer.innerHTML = e.statusText;
 						  }
 	}).responseJSON;
 	//console.log(c, _url);
@@ -98,8 +98,11 @@ $.ajax({
 	},
 	error: function(e){
 		alert("Something went wrong");
-		console.log(JSON.parse(e.responseText));
-		setNetworkStatus.Err();
+		console.log(e);
+		if(!navigator.onLine)
+				setNetworkStatus.Err();
+			else
+				infoContainer.innerHTML = e.statusText;
 	}
 });
 
