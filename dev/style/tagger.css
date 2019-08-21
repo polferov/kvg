@@ -1,2 +1,13 @@
-/* CSS Document */
 
+* {
+	font-family: Arial;
+}
+
+.container {
+	display: block;
+	margin-bottom: 10px;
+}
+
+input {
+	display: block;
+}

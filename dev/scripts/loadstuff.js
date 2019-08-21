@@ -23,6 +23,9 @@ var kvg = {
 	}
 };
 
+var tags = settings.get(settings.tags);
+		console.log(tags);
+
 var locstrg = {
 	name: "history",
 	count: 10,
@@ -218,6 +221,8 @@ function generateInfoUl(Obj){
 			err.innerHTML = "no current Information";
 			return err;
 		}
+	
+	
 	var ul = document.createElement("ul");
 	ul.id = "infoUL";
 	Obj.actual.sort((a,b) => a.actualRelativeTime != b.actualRelativeTime ? a.actualRelativeTime - b.actualRelativeTime : (a.patternText != b.patternText ? a.patternText - b.patternText : a.direction < b.direction)).forEach(function(lmnt){
@@ -239,6 +244,18 @@ function generateInfoUl(Obj){
 		var pte = document.createElement("p");
 		pte.classList.add("busTitle");
 		pte.innerHTML = ptxt + " --> " + dir;
+		var tgs = tags[ptxt];
+		for(var i = 0; i < tags.length; i++)
+			{
+				var tag = document.createElement("div");
+				tag.style.display = "inline-block";
+				tag.style.marginLeft = "10px";
+				tag.style.padding = 0;
+				tag.style.height = "10px";
+				tag.style.width = "10px";
+				tag.style.background = tgs[i];
+				pte.appendChild(tag);
+			}
 		d.appendChild(pte);
 		
 		var tme = document.createElement("div");

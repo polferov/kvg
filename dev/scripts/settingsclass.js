@@ -7,6 +7,8 @@ var settings = {
 	fontSizeMultiplikatorSearch: "fontSizeMultiplikatorSearch",
 	fontSizeMultiplikatorInfo: "fontSizeMultiplikatorInfo",
 	fontSizeMultiplikatorSearchAutocomplete: "fontSizeMultiplikatorSearchAutocomplete",
+	tags: "tags",
+	tagsLastState: "tagsLastState",
 	
 	get: function (property) {
 		if(!property)
