@@ -1,6 +1,7 @@
 var timeInMin = false;
 
-var gsc = "http://kirill.cf/getSiteContent.php?url=";
+//var gsc = "http://kirill.cf/getSiteContent.php?url=";
+var gsc = "https://cors-anywhere.herokuapp.com/";
 var infoContainer = document.getElementById("infoContainer");
 var stopSearchAutocompleteUL = document.getElementById("autocomplete");
 var activeStop = null;
@@ -70,7 +71,7 @@ function contentOf(_url){
 //	return $.getJSON(gsc + encodeURIComponent(_url));
 	
 	return $.ajax({
-		url: gsc + encodeURIComponent(_url),
+		url: gsc + /*encodeURIComponent(_url)*/ _url,
 		dataType: "json",
 		async: false,
 		success: function(res){c = res; setNetworkStatus.OK(); return res;},
