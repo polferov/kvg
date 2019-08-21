@@ -65,7 +65,7 @@ function init(){
 		if(hist.length > 0)
 			{
 				activeStop = hist.reverse()[0].stopNr || -1;
-document.getElementById('uiStop').value = hist.reverse()[0].passengerName;
+document.getElementById('uiStop').value = hist[0].passengerName;
 			}
 }
 init();
@@ -131,10 +131,11 @@ function onUiInput(e){
 function filterStops(filter)
 {
 	"use strict";
-	if(filter == "")
+	var inp = document.getElementById('uiStop');
+	if(filter == "" || (inp.selectionStart == 0 && inp.selectionEnd == inp.value.length))
 		return [locstrg.get().reverse(), null] || [];
 	
-	console.log(filter);
+//	console.log(filter);
 	
 	var a = [];
 	var b = [];
@@ -188,7 +189,7 @@ function generateStopLIs(stps){
 			}
 		}
 	console.log(stps)
-	console.log(LIs);
+//	console.log(LIs);
 	return(LIs);
 	
 }
@@ -214,7 +215,7 @@ function acUlClick(e){
 }
 
 function generateInfoUl(Obj){
-	console.log(Obj);
+//	console.log(Obj);
 	if(! Obj.actual[0])
 		{
 			var err = document.createElement("p");
@@ -244,17 +245,22 @@ function generateInfoUl(Obj){
 		var pte = document.createElement("p");
 		pte.classList.add("busTitle");
 		pte.innerHTML = ptxt + " --> " + dir;
-		var tgs = tags[ptxt];
-		for(var i = 0; i < tags.length; i++)
+		if(tags)
 			{
-				var tag = document.createElement("div");
-				tag.style.display = "inline-block";
-				tag.style.marginLeft = "10px";
-				tag.style.padding = 0;
-				tag.style.height = "10px";
-				tag.style.width = "10px";
-				tag.style.background = tgs[i];
-				pte.appendChild(tag);
+				var tgs = tags[ptxt];
+				if(tgs)
+					for(var i = 0; i < tgs.length; i++)
+						{
+	//				console.log("Hello");
+							var tag = document.createElement("div");
+							tag.style.display = "inline-block";
+							tag.style.marginLeft = "10px";
+							tag.style.padding = 0;
+							tag.style.height = "10px";
+							tag.style.width = "10px";
+							tag.style.background = tgs[i];
+							pte.appendChild(tag);
+						}
 			}
 		d.appendChild(pte);
 		
@@ -301,7 +307,7 @@ function timeDiffInMin(a, b){
 	a = parseInt(a[0])*60+parseInt(a[1]);
 	b = parseInt(b[0])*60+parseInt(b[1]);
 	var d = b-a;
-	console.log(d);
+//	console.log(d);
 	//if(d<(-12*60))
 	//		d+=24*60;
 	return d;
