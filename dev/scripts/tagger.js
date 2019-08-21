@@ -51,7 +51,7 @@ function save () {
 	
 //	console.log(lmnts);
 	
-	var tags = [];
+	var tags = {};
 	
 	for(var i = 0; i < lmnts.length; i++) {
 //		console.log(lmnts[i].children[0].value);
