@@ -200,7 +200,19 @@ var stopRefresh = setInterval(function(){
 //	console.log("test");
 	if(activeStop == null)
 		return;
-	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;
+	$.get({
+		url: "php/infoUlBuilder.php",
+		data: {
+			stop: activeStop,
+			timeInMin: timeInMin,
+			tags: tags
+		},
+		success: function(res)
+		{
+			console.log(res);
+			infoContainer.innerHTML = res;
+		}
+	});
 }, 1000);
 
 function acUlClick(e){
@@ -211,7 +223,7 @@ function acUlClick(e){
 	locstrg.add(JSON.parse(e.target.getAttribute("lmnt")));
 //	alert("test");
 	console.log(locstrg.get());
-	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;
+//	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;
 }
 
 function generateInfoUl(Obj){

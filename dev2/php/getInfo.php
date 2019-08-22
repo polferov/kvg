@@ -2,20 +2,22 @@
 $arrival = "https://www.kvg-kiel.de//internetservice/services/passageInfo/stopPassages/stop?mode=arrival&stop=";
 $departure = "https://www.kvg-kiel.de//internetservice/services/passageInfo/stopPassages/stop?mode=departure&stop=";
 
-echo("Hello2");
+$data = null;
 
-if(isset($_POST['stop']))
+if(isset($_GET['stop']))
 {
-	if(isset($_POST['mode']))
+	if(isset($_GET['mode']))
 	{
-		if($_POST['mode'] == "arr")
-			echo file_get_contents($arrival + $_POST['stop']);
+		if($_GET['mode'] == "arr")
+			$data = file_get_contents($arrival . $_GET['stop']);
 		
-		if($_POST['mode'] == "dep")
-			echo file_get_contents($departure + $_POST['stop']);
+		if($GET['mode'] == "dep")
+			$data = file_get_contents($departure . $_GET['stop']);
 	}
 	else
-		echo file_get_contents($departure + $_POST['stop']);
+		$data = file_get_contents($departure . $_GET['stop']);
 }
 else 
 	echo file_get_contents('instructions.html');
+
+echo $data;
