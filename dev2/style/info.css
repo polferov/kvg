@@ -38,11 +38,12 @@
 .tag {
 	height: 10px;
 	width: 10px;
+	margin-right: 5px !important;
 	display: inline-block;
 }
 
 .tags {
 	margin: 0px;
 	padding: 0px;
-	margin-left: 10px;
+	margin-left: 5px !important;
 }
