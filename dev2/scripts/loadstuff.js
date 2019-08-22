@@ -1,4 +1,4 @@
-var timeInMin = false;
+var timeInMin = settings.get(settings.convertTime) || false;
 
 //var gsc = "http://kirill.cf/getSiteContent.php?url=";
 var gsc = "https://cors-anywhere.herokuapp.com/";
@@ -67,6 +67,7 @@ function init(){
 				activeStop = hist.reverse()[0].stopNr || -1;
 document.getElementById('uiStop').value = hist[0].passengerName;
 			}
+	loadInfo();
 }
 init();
 
@@ -200,12 +201,16 @@ var stopRefresh = setInterval(function(){
 //	console.log("test");
 	if(activeStop == null)
 		return;
+	loadInfo();
+}, 1000);
+
+async function loadInfo(){
 	$.get({
 		url: "php/infoUlBuilder.php",
 		data: {
 			stop: activeStop,
 			timeInMin: timeInMin,
-			tags: tags
+			tags: JSON.stringify(tags)
 		},
 		success: function(res)
 		{
@@ -213,7 +218,7 @@ var stopRefresh = setInterval(function(){
 			infoContainer.innerHTML = res;
 		}
 	});
-}, 1000);
+}
 
 function acUlClick(e){
 	$("#uiStop").val(e.target.innerHTML);
@@ -221,6 +226,7 @@ function acUlClick(e){
 //	console.log(kvg.get.passageInfo.arrival("1312"));
 	activeStop = e.target.getAttribute("stopnr");
 	locstrg.add(JSON.parse(e.target.getAttribute("lmnt")));
+	loadInfo();
 //	alert("test");
 	console.log(locstrg.get());
 //	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;

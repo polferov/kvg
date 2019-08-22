@@ -15,17 +15,21 @@ else
 
 $data = json_decode($data);
 
-$tgs = $_POST['tags'];
+$tgs = null;
+if(isset($_GET['tags']))
+	$tgs = $_GET['tags'];
+$tgs = json_decode($tgs);
 
 echo generateInfoUl($data);
 
 function createTags($tags)
 {
 	if(!$tags)
-		return '';
+		return 'Hello';
+	
 	$td = '<div class="tags">';
 	foreach($tags as $tag)
-		$td .= '<div style="background = '.$tag.'" class="tag"></div>';
+		$td .= '<div style="background: '.$tag.';" class="tag"></div>';
 	$td .= '</div>';
 	return($td);
 }
@@ -36,8 +40,11 @@ function createLI($obj)
 	$html = "<li>";
 	$html .= "<div>";
 	$html .= '<p class="busTitle">'.$obj->patternText.' --> '.$obj->direction.'</p>';
-	if(isset($tgs[$obj->patternText]))
-		$html .= createTags($tgs[$obj->patternText]);
+	
+	$ptxt = $obj->patternText;
+	if(isset($GLOBALS['tgs']->$ptxt))
+		$html .= createTags($GLOBALS['tgs']->$ptxt);
+	
 	$html .='<div class="fixedTimeDiv">';
 	$html .= '<span class="actualTime';
 	if(isset($obj->actualTime))
@@ -50,12 +57,17 @@ function createLI($obj)
 	$html .= "</div>";
 	
 	$time = $obj->actualRelativeTime;
-	if($_POST['timeInMin'])
-		$time = secToMin($time);
+	if(isset($_GET['timeInMin']))
+		if($_GET['timeInMin'] == "true")
+			$time = secToMin($time);
+//	echo $_GET['timeInMin'];
 	
 	$html .= '<div class="timeContainer">';
 	$html .= '<span>'.$time.'</span>';
-	$html .= '<span>'."latency".'</span>';
+	$td = calcTimeDif($obj->plannedTime, $obj->actualTime);
+	if($td == 0)
+		$td = '';
+	$html .= '<span>'.((String) $td).'</span>';
 	$html .= "</div>";
 	
 	$html .= "</div>";
@@ -199,12 +211,24 @@ function generateInfoUl($Obj){
 
 function secToMin($sec){
 	$min = (String)((Int)($sec / 60));
-	$sec = (String)($sec % 60);
+	$sec = (String)abs($sec % 60);
 	
-	if(sizeof($sec) == 0)
+	if(strlen($sec) == 0)
 		$sec = "00";
-	if(sizeof($sec) == 1)
+	if(strlen($sec) == 1)
 		$sec = "0".$sec;
-	if(sizeof($sec) > 2)
+	if(strlen($sec) > 2)
 		$sec = "Error";
+	return($min . ':' . $sec);
+}
+
+function calcTimeDif($a, $b)
+{
+	return timeStringToMin($b) - timeStringToMin($a);
+}
+
+function timeStringToMin($t){
+	$t = explode(':', $t);
+	$min = ((Int)$t[0])*60 + ((Int)$t[1]);
+	return($min);
 }
