@@ -15,28 +15,20 @@ else
 
 $data = json_decode($data);
 
+$tgs = $_POST['tags'];
+
 echo generateInfoUl($data);
 
-/*function createTags($tags)
+function createTags($tags)
 {
-	if(tags)
-			{
-				var tgs = tags[ptxt];
-				if(tgs)
-					for(var i = 0; i < tgs.length; i++)
-						{
-	//				console.log("Hello");
-							var tag = document.createElement("div");
-							tag.style.display = "inline-block";
-							tag.style.marginLeft = "10px";
-							tag.style.padding = 0;
-							tag.style.height = "10px";
-							tag.style.width = "10px";
-							tag.style.background = tgs[i];
-							pte.appendChild(tag);
-						}
-			}
-}*/
+	if(!$tags)
+		return '';
+	$td = '<div class="tags">';
+	foreach($tags as $tag)
+		$td .= '<div style="background = '.$tag.'" class="tag"></div>';
+	$td .= '</div>';
+	return($td);
+}
 
 
 function createLI($obj)
@@ -44,6 +36,8 @@ function createLI($obj)
 	$html = "<li>";
 	$html .= "<div>";
 	$html .= '<p class="busTitle">'.$obj->patternText.' --> '.$obj->direction.'</p>';
+	if(isset($tgs[$obj->patternText]))
+		$html .= createTags($tgs[$obj->patternText]);
 	$html .='<div class="fixedTimeDiv">';
 	$html .= '<span class="actualTime';
 	if(isset($obj->actualTime))
