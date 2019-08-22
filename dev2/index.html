@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>KVG Echtzeit</title>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="sw-install.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	<link rel="stylesheet" href="style/search.css">
+	<link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" href="style/info.css">
+	<link rel="manifest" href="webapstuff/manifest.json">
+</head>
+
+<body id="bdy">
+    
+    <h4 id="backToNormal" style="padding: 0; margin: 5px; display: none;"><a href=".." style="padding: 1px; margin: 0;">back to normal</a></h4>
+
+	<div id="uiContainer">
+		<form>
+			<div id="uiStopSearch">
+				<input type="search" id="uiStop" placeholder="stop"/>
+				<ul id="autocomplete"></ul>
+			</div>
+		</form>
+	</div>
+	
+	<div id="networkInfo">
+		<span>Network Status:</span>
+		<span id="networkStatus">
+			<img src="icons/ok.png" id="networkOK">
+			<img src="icons/fail.png" id="networkErr">
+		</span>
+		<span><a id="settings" href="settings.html" target="_blank"><img alt="Settings" src="icons/settings.png"></a></span>
+	</div>
+	
+	<div id="infoContainer"/>
+
+<!--	<script src="scripts/stops.js"></script>-->
+	<script src="scripts/settingsclass.js"></script>
+	<script src="style/style.js"></script>
+	<script src="scripts/loadstuff.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+.timeContainer {
+	display: flex;
+	justify-content: space-between;
+}
+
+* {
+	list-style: none;
+}
+
+#infoUL {
+	background-color: #ddd;
+	padding: 0;
+}
+
+#infoUL li div * {
+	margin: 0;
+}
+
+#infoUL li {
+	margin: 0;
+	display: block;
+	background-color: #fff;
+}
+
+#infoUL .busTitle {
+	margin: 3px;
+}
+
+.actualTime {
+	margin-right: 10px !important;
+}
+
+.overwritten {
+	text-decoration: line-through;
+}
