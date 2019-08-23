@@ -13,6 +13,13 @@ if(isset($_GET['stop']))
 else
 	echo "Hello4";
 
+//echo $data;
+
+if($data == -1){
+	echo -1;
+	die();
+}
+
 $data = json_decode($data);
 
 $tgs = null;

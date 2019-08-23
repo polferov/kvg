@@ -129,34 +129,43 @@ function onUiInput(e){
 	
 }
 
-function filterStops(filter)
-{
-	"use strict";
-	var inp = document.getElementById('uiStop');
-	if(filter == "" || (inp.selectionStart == 0 && inp.selectionEnd == inp.value.length))
-		return [locstrg.get().reverse(), null] || [];
-	
-//	console.log(filter);
-	
-	var a = [];
-	var b = [];
-	var c = [];
-	for(var i = 0; i < stops.length; i++)
-		if(stops[i].passengerName.toLowerCase().indexOf(filter.toLowerCase()) == 0)
-			a.push(stops[i]);
-	
-	
-	for(var i = 0; i < stops.length; i++)
-		if(stops[i].passengerName.toLowerCase().indexOf(filter.toLowerCase()) > 0)
-			b.push(stops[i]);
-	
-	c.push(a);
-	c.push(b);
-	return c;
+
+var stopRefresh = setInterval(function(){
+	//infoContainer.innerHTML = null;
+//	console.log("test");
+	if(activeStop == null)
+		return;
+	loadInfo();
+}, 1000);
+
+async function loadInfo(){
+	$.get({
+		url: "php/infoUlBuilder.php",
+		data: {
+			stop: activeStop,
+			timeInMin: timeInMin,
+			tags: JSON.stringify(tags)
+		},
+		success: function(res)
+		{
+			console.log(res);
+			if(res == "-1")
+				{	
+//					console.log("Test");
+					infoContainer.innerHTML = "request error";
+//					return;
+				}
+			else
+				infoContainer.innerHTML = res;
+		},
+		error: function(e){
+			if(!navigator.onLine)
+				setNetworkStatus.Err();
+			else
+				infoContainer.innerHTML = infoContainer.innerHTML = e.statusText;
+		}
+	});
 }
-
-
-
 
 function generateStopLIs(stps){
 	var LIs = [];
@@ -196,28 +205,30 @@ function generateStopLIs(stps){
 }
 
 
-var stopRefresh = setInterval(function(){
-	//infoContainer.innerHTML = null;
-//	console.log("test");
-	if(activeStop == null)
-		return;
-	loadInfo();
-}, 1000);
-
-async function loadInfo(){
-	$.get({
-		url: "php/infoUlBuilder.php",
-		data: {
-			stop: activeStop,
-			timeInMin: timeInMin,
-			tags: JSON.stringify(tags)
-		},
-		success: function(res)
-		{
-			console.log(res);
-			infoContainer.innerHTML = res;
-		}
-	});
+function filterStops(filter)
+{
+	"use strict";
+	var inp = document.getElementById('uiStop');
+	if(filter == "" || (inp.selectionStart == 0 && inp.selectionEnd == inp.value.length))
+		return [locstrg.get().reverse(), null] || [];
+	
+//	console.log(filter);
+	
+	var a = [];
+	var b = [];
+	var c = [];
+	for(var i = 0; i < stops.length; i++)
+		if(stops[i].passengerName.toLowerCase().indexOf(filter.toLowerCase()) == 0)
+			a.push(stops[i]);
+	
+	
+	for(var i = 0; i < stops.length; i++)
+		if(stops[i].passengerName.toLowerCase().indexOf(filter.toLowerCase()) > 0)
+			b.push(stops[i]);
+	
+	c.push(a);
+	c.push(b);
+	return c;
 }
 
 function acUlClick(e){
@@ -232,107 +243,4 @@ function acUlClick(e){
 //	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;
 }
 
-function generateInfoUl(Obj){
-//	console.log(Obj);
-	if(! Obj.actual[0])
-		{
-			var err = document.createElement("p");
-			err.innerHTML = "no current Information";
-			return err;
-		}
-	
-	
-	var ul = document.createElement("ul");
-	ul.id = "infoUL";
-	Obj.actual.sort((a,b) => a.actualRelativeTime != b.actualRelativeTime ? a.actualRelativeTime - b.actualRelativeTime : (a.patternText != b.patternText ? a.patternText - b.patternText : a.direction < b.direction)).forEach(function(lmnt){
-		
-		var li = document.createElement("li");
-		ul.appendChild(li);
-		var d = document.createElement("div");
-		li.appendChild(d);
-		
-		var ptxt = lmnt.patternText;
-		var dir = lmnt.direction;
-		var art = lmnt.actualRelativeTime;
-		var at = lmnt.actualTime;
-		var mt = lmnt.mixedTime;
-		var ptme = lmnt.plannedTime;
-		var stts = lmnt.status;
-		
-		
-		var pte = document.createElement("p");
-		pte.classList.add("busTitle");
-		pte.innerHTML = ptxt + " --> " + dir;
-		if(tags)
-			{
-				var tgs = tags[ptxt];
-				if(tgs)
-					for(var i = 0; i < tgs.length; i++)
-						{
-	//				console.log("Hello");
-							var tag = document.createElement("div");
-							tag.style.display = "inline-block";
-							tag.style.marginLeft = "10px";
-							tag.style.padding = 0;
-							tag.style.height = "10px";
-							tag.style.width = "10px";
-							tag.style.background = tgs[i];
-							pte.appendChild(tag);
-						}
-			}
-		d.appendChild(pte);
-		
-		var tme = document.createElement("div");
-		tme.classList.add("timeContainer");
-		var sece = document.createElement("span");
-		var verspe = document.createElement("span");
-		var fixedTimeDiv = document.createElement("div");
-		fixedTimeDiv.classList.add("fixedTimeDiv");
-		
-		var pte = document.createElement("span");
-		pte.innerHTML = ptme;
-		pte.classList.add("actualTime");
-		fixedTimeDiv.appendChild(pte);
-		if(ptme != at)
-			{
-				var ate = document.createElement("span");
-				ate.innerHTML = at;
-				ate.classList.add("actualTime");
-				pte.classList.add("overwritten");
-				fixedTimeDiv.appendChild(ate);
-			}
-		
-		sece.innerHTML = settings.get(settings.convertTime) ? Math.floor(art/60) + ':' + (Math.abs(art%60).toString().length == 2 ? Math.abs(art%60).toString() : (Math.abs(art%60).toString().length == 1 ? "0" + Math.abs(art%60).toString() : (Math.abs(art%60).toString().length == 0 ? "00" : "error"))) : art;
-		var td = timeDiffInMin(ptme, at);
-		verspe.innerHTML = td != 0 ? td : "";
-		d.appendChild(fixedTimeDiv);
-		tme.appendChild(sece);
-		tme.appendChild(verspe);
-		d.appendChild(tme);
-		
-		
-		
-	});
-	return ul;
-}
 
-
-function timeDiffInMin(a, b){
-	if(!a || !b)
-		return 0;
-	a = timeStringToMin(a);
-	b = timeStringToMin(b);
-	a = parseInt(a[0])*60+parseInt(a[1]);
-	b = parseInt(b[0])*60+parseInt(b[1]);
-	var d = b-a;
-//	console.log(d);
-	//if(d<(-12*60))
-	//		d+=24*60;
-	return d;
-}
-
-function timeStringToMin(t) {
-	if(!t)
-		return [0,0];
-	return t.split(":");
-}

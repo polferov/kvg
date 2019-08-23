@@ -4,6 +4,8 @@ $departure = "https://www.kvg-kiel.de//internetservice/services/passageInfo/stop
 
 $data = null;
 
+ini_set("display_errors", 0);
+
 if(isset($_GET['stop']))
 {
 	if(isset($_GET['mode']))
@@ -20,4 +22,6 @@ if(isset($_GET['stop']))
 else 
 	echo file_get_contents('instructions.html');
 
+if(!$data)
+	$data = -1;
 echo $data;
