@@ -1,5 +1,7 @@
 <?php
 
+ini_set("display_errors", 1);
+
 $gi = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . "/getInfo.php";
 
 if(isset($_GET['stop']))

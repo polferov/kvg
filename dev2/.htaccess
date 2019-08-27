@@ -1,2 +1,9 @@
 
 ErrorDocument 404 "/error404.html"
+
+#RewriteEngine on
+#RewriteCond %{HTTPS} off
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+Order allow,deny
+Allow from all
