@@ -30,8 +30,8 @@ const setNetworkStatus = {
 	}
 }
 
-if(!settings.get(settings.hideBackToNormal))
-	document.getElementById("backToNormal").style.display = "block";
+//if(!settings.get(settings.hideBackToNormal))
+	//document.getElementById("backToNormal").style.display = "block";
 
 //document.getElementById('uiContainer').style.cssText += "font-size: 1000px;";
 
