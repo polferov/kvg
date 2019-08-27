@@ -6,23 +6,25 @@
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<link rel="manifest" href="manifest.json">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 		<!--<script src="../jq/jquery-3.4.1.js"></script>-->
 	</head>
 
 	<body>
 		<h4 id="beta" style="padding: 0; margin: 1px; display: none;"><a href="dev" style="padding: 1px; margin: 0;">view beta status</a></h4>
      <!--   <object data="https://www.kvg-kiel.de/internetservice/m.kvg" width="100%" height="100%"></object>  -->
-        <object id="obj" data="https://www.kvg-kiel.de/fahrplan/echtzeit/" width="100%" height="100%"></object>
+        <!-- <object id="obj" data="https://www.kvg-kiel.de/fahrplan/echtzeit/" width="100%" height="100%"></object> -->
+        <iframe src="" id="obj" data="https://www.kvg-kiel.de/fahrplan/echtzeit/" width="100%" height="100%"></iframe>
         <!--<iframe id="ifr" src="https://www.kvg-kiel.de/fahrplan/echtzeit/" width="100%" height="100%"></iframe>-->
 
         <script type="text/javascript">
         	if(localStorage.getItem('vphp') != "true"){
-        		document.getElementById('obj').setAttribute('data', 'https://www.kvg-kiel.de/fahrplan/echtzeit/');
+        		document.getElementById('obj').setAttribute('src', 'https://www.kvg-kiel.de/fahrplan/echtzeit/');
         		document.getElementById('beta').style.display = "block";
         	}
         	else
         	{
-        		document.getElementById('obj').setAttribute('data', 'https://kvg.thekirillproject.cf');
+        		document.getElementById('obj').setAttribute('src', 'https://kvg.thekirillproject.cf');
 
         	}
         </script>
