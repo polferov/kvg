@@ -9,6 +9,8 @@ var settings = {
 	fontSizeMultiplikatorSearchAutocomplete: "fontSizeMultiplikatorSearchAutocomplete",
 	tags: "tags",
 	tagsLastState: "tagsLastState",
+	timeScheduleActive: "timeScheduleActive",
+	timeSchedule: "timeSchedule",
 	
 	get: function (property) {
 		if(!property)
