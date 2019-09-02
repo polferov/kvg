@@ -25,3 +25,17 @@ function nrOnChange(e){
 	settings.set(sender.getAttribute("setting"), sender.value);
 	
 }
+
+
+
+
+function clearStorage() {
+	if(confirm('Delete?'))
+	{
+		localStorage.clear();
+		alert('done');
+	}
+	else
+		alert('canceled')
+	
+}

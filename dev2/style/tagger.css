@@ -11,3 +11,13 @@
 input {
 	display: block;
 }
+
+textarea {
+	display: block;
+	width: 100%;
+}
+
+.fl {
+	display: flex;
+	justify-content: space-between;
+}

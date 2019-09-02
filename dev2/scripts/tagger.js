@@ -10,11 +10,23 @@ function createElementBlank(){
 	color.setAttribute("placeholder", "css color");
 	color.classList.add("colorInput");
 	
+	var close = document.createElement('button');
+	close.innerHTML = "X";
+	close.onclick = function(e){
+//		console.log(e);
+		con.removeChild(e.path[2]);
+	};
+	
 	var elements = document.createElement("textarea");
 	elements.setAttribute("placeholder", "bus numbers separated by \";\" example: \"11; 22\" or \"11;22\"");
 	elements.classList.add("busNrInput");
 	
-	container.appendChild(color);
+	var fl = document.createElement('div');
+	fl.classList.add('fl');
+	
+	fl.appendChild(color);
+	fl.appendChild(close);
+	container.appendChild(fl);
 	container.appendChild(elements);
 	
 	return container;
@@ -23,8 +35,8 @@ function createElementBlank(){
 function createElementFilled(color, busses){
 	"use strict";
 	var element = createElementBlank();
-	var clr = element.children[0];
-	var bss = element.children[1];
+	var clr = element.children[0].children[0];
+	var bss = element.clildren[1];
 	clr.value = color;
 	
 	if(busses.length)
@@ -46,17 +58,20 @@ function save () {
 	var lmnts = document.getElementsByClassName("container");
 	
 	for(var i = 0; i < lmnts.length; i++)
-		if(!(lmnts[i].children[0].value && lmnts[i].children[1].value))
+	{
+//		console.log(lmnts[i].children[1]);
+			if(!(lmnts[i].children[0].children[0].value && lmnts[i].children[1].value))
 			con.removeChild(lmnts[i]);
+	}
 	
 //	console.log(lmnts);
 	
 	var tags = {};
 	
 	for(var i = 0; i < lmnts.length; i++) {
-//		console.log(lmnts[i].children[0].value);
-		var clr = lmnts[i].children[0].value;
-		lmnts[i].children[0].setAttribute("value", clr);
+//		console.log(lmnts[i].children[0].children[0].value);
+		var clr = lmnts[i].children[0].children[0].value;
+		lmnts[i].children[0].children[0].setAttribute("value", clr);
 //		console.log(clr);
 		var bss = busStringToArray(lmnts[i].children[1].value);
 		lmnts[i].children[1].innerHTML = lmnts[i].children[1].value;
