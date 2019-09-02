@@ -1,2 +1,13 @@
 /* CSS Document */
 
+.startTime::before {
+	content: "Start: ";
+}
+
+.endTime::before {
+	content: "End: ";
+}
+
+.element {
+	margin-bottom: 10px;
+}

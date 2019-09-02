@@ -11,6 +11,7 @@ var settings = {
 	tagsLastState: "tagsLastState",
 	timeScheduleActive: "timeScheduleActive",
 	timeSchedule: "timeSchedule",
+	timeScheduleLastState: "timeScheduleLastState",
 	
 	get: function (property) {
 		if(!property)
