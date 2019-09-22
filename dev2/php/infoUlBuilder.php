@@ -2,18 +2,27 @@
 
 ini_set("display_errors", 1);
 
-$gi = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . "/getInfo.php";
+
+$arrival = "http://www.kvg-kiel.de//internetservice/services/passageInfo/stopPassages/stop?mode=arrival&stop=";
+$departure = "http://www.kvg-kiel.de//internetservice/services/passageInfo/stopPassages/stop?mode=departure&stop=";
+
+$data = null;
+
+ini_set("display_errors", 0);
 
 if(isset($_GET['stop']))
 {
-	$data = null;
 	if(isset($_GET['mode']))
-		$data = file_get_contents($gi . "?stop=" . $_GET['stop'] . "&mode=" . $_GET['mode']);
+	{
+		if($_GET['mode'] == "arr")
+			$data = file_get_contents($arrival . $_GET['stop']);
+		
+		if($GET['mode'] == "dep")
+			$data = file_get_contents($departure . $_GET['stop']);
+	}
 	else
-		$data = file_get_contents($gi . "?stop=" . $_GET['stop']);
+		$data = file_get_contents($departure . $_GET['stop']);
 }
-else
-	echo "Hello4";
 
 //echo $data;
 

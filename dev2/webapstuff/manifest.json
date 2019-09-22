@@ -2,7 +2,7 @@
   "short_name": "Echtzeitabfahrten",
   "name": "KVG Echtzeitabfahrten",
   "display": "standalone",
-  "description": "tst",
+  "description": "none",
   "icons": [
         {
             "src": "icons/192x192.png",
@@ -17,5 +17,6 @@
     ],
   "background_color": "#C11919",
   "theme_color": "#C11919",
-	"start_url": "/"
+	"start_url": "/",
+    "scope": "/"
 }

@@ -149,6 +149,7 @@ async function loadInfo(){
 		success: function(res)
 		{
 			console.log(res);
+            setNetworkStatus.OK();
 			if(res == "-1")
 				{	
 //					console.log("Test");

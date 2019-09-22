@@ -1,14 +1,45 @@
-const CACHE_NAME = "sitecache";
+const CACHE_NAME = "sitecache-v1";
 
-const urlsToCache = [];
+const urlsToCache = [
+    "/index.html",
+    "/"
+];
 
 self.addEventListener('install', function(event) {
-  // Perform install steps
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+  event.waitUntil(caches.open(CACHE_NAME).then(function(cache){
+          console.log(cache);
+          cache.addAll(urlsToCache);
       })
-  );
+                 
+    );
+});
+
+
+
+self.addEventListener("fetch", function(event){
+    if(!navigator.onLine)
+        {
+            event.respondWith(caches.match(event.request).then(function(response){
+                
+                if(response){
+                    console.log(response);
+                    return response;
+                }
+                return fetch(event.request);
+            }));
+        }
+    
+    fetch(event.request).then(function(response){
+        if(!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+        
+        var newCache = response.clone();
+        
+        for(var i in urlsToCache)
+            if(urlsToCache[i] == event.request.url)
+                caches.open(CACHE_NAME).then(function(cache){
+                    cache.put(event.request, newCache);
+                });
+    });
 });
