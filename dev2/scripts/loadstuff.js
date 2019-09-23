@@ -23,6 +23,28 @@ var kvg = {
 	}
 };
 
+
+var stops;
+$.ajax({
+	url: "stops.json",
+	async: false,
+	success: function(res){
+		//console.log(res);
+		stops = res.sort((a,b) => (a.passengerName > b.passengerName) ? 1 : ((b.passengerName > a.passengerName) ? -1 : 0));
+		console.log(stops);
+		setNetworkStatus.OK();
+	},
+	error: function(e){
+		alert("Something went wrong");
+		console.log(e);
+		if(!navigator.onLine)
+				setNetworkStatus.Err();
+			else
+				infoContainer.innerHTML = e.statusText;
+	}
+});
+
+
 var tags = settings.get(settings.tags);
 		console.log(tags);
 
@@ -57,7 +79,32 @@ var locstrg = {
 	}
 }
 
+function timeScheduleCheck(){
+	if(!localStorage.getItem('timeSchedule'))
+		return;
+	var ts = JSON.parse(localStorage.getItem('timeSchedule'));
+	
+	var today = new Date();
+	var nowInMin = today.getHours() * 60;
+	nowInMin += today.getMinutes();
+	
+	for(var i = 0; i < ts.length; i++)
+		if(toMin(ts[i].start) <= nowInMin && toMin(ts[i].end) >= nowInMin)
+			return ts[i].stop;
+		
+}
+
+function toMin(time){
+	return (parseInt(time.split(':')[0]) * 60) + parseInt(time.split(':')[1]);
+}
+
 function init(){
+	var result = timeScheduleCheck();
+	if(result){
+			activeStop = result;
+			document.getElementById('uiStop').value = stops.filter((a) => a.stopNr == result)[0].passengerName;
+		return;
+		}
 	if(!settings.get(settings.returnToLast))
 		return;
 	var hist = locstrg.get();
@@ -92,24 +139,7 @@ function contentOf(_url){
 }
 
 //Get stops----------------------------------------------------------
-var stops;
-$.ajax({
-	url: "stops.json",
-	success: function(res){
-		//console.log(res);
-		stops = res.sort((a,b) => (a.passengerName > b.passengerName) ? 1 : ((b.passengerName > a.passengerName) ? -1 : 0));
-		console.log(stops);
-		setNetworkStatus.OK();
-	},
-	error: function(e){
-		alert("Something went wrong");
-		console.log(e);
-		if(!navigator.onLine)
-				setNetworkStatus.Err();
-			else
-				infoContainer.innerHTML = e.statusText;
-	}
-});
+
 
 //ui
 
