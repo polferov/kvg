@@ -100,7 +100,7 @@ function toMin(time){
 
 function init(){
 	var result = timeScheduleCheck();
-	if(result){
+	if(result && settings.get('timeSchedule')){
 			activeStop = result;
 			document.getElementById('uiStop').value = stops.filter((a) => a.stopNr == result)[0].passengerName;
 		return;
