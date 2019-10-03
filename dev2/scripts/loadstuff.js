@@ -149,8 +149,8 @@ document.getElementById("autocomplete").onTouchEnd = acUlClick;
 document.getElementById("uiStop").addEventListener("input", onUiInput);
 document.getElementById("uiStop").addEventListener("focus", onUiInput);
 
-function onUiInput(e){
-	var val = e.srcElement.value;
+function onUiInput(){
+	var val = document.getElementById('uiStop').value;
 	var stps = filterStops(val);
 	var LIs = generateStopLIs(stps);
 	stopSearchAutocompleteUL.innerHTML = null;
@@ -178,7 +178,7 @@ async function loadInfo(){
 		},
 		success: function(res)
 		{
-			console.log(res);
+//			console.log(res);
             setNetworkStatus.OK();
 			if(res == "-1")
 				{	
@@ -239,6 +239,7 @@ function generateStopLIs(stps){
 function filterStops(filter)
 {
 	"use strict";
+	console.log(filter);
 	var inp = document.getElementById('uiStop');
 	if(filter == "" || (inp.selectionStart == 0 && inp.selectionEnd == inp.value.length))
 		return [locstrg.get().reverse(), null] || [];

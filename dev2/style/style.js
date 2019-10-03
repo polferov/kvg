@@ -1,10 +1,27 @@
 document.getElementById("uiStop").addEventListener("input", function(){
 	document.getElementById("autocomplete").style.display = "block";
 });
-document.getElementById("uiStop").addEventListener("focus", function(){
-	document.getElementById("uiStop").select();
+document.getElementById("uiStop").addEventListener("click", function(){
+	var si = document.getElementById("uiStop")
 	document.getElementById("autocomplete").style.display = "block";
+	
+	if(!(si.selectionStart == 0 && si.selectionEnd == si.value.length))
+		si.select();
+	else{
+		si.selectionStart = si.selectionEnd;
+		
+	}
+//	alert(si.selectionStart);
+//	alert(si.selectionEnd);
+//	alert(si.value.length);
+	onUiInput();
 });
+
+//$('#uiStop').focusin(function(){
+//	document.getElementById("uiStop").blur();
+//	document.getElementById("uiStop").select();
+////	document.getElementById("uiStop").focus();
+//});
 
 
 document.getElementById("autocomplete").addEventListener("click", function(){
