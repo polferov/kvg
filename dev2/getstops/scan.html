@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Unbenanntes Dokument</title>
-<script src="../../jq/jquery-3.4.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
@@ -11,14 +11,21 @@
 		var a = [];
 		for(var i = 0; i < 57000; i++)
 			{
-				$.ajax({
-					url: "scan.php?url=" + encodeURIComponent("https://www.kvg-kiel.de/internetservice/services/stopInfo/stop?stop=" +i),
+				$.get({
+					async: false,
+					url: "scan.php",
+					data:{
+						"nr": i
+					},
 					success: function(res){
 						if(res[0] == "<")
 						{return;}
 						a.push(res);
 					}
 				});
+				
+				if(i%100 == 0)
+					document.body.innerHTML += " " + i;
 			}
 		//console.log(a);
 		console.log(JSON.stringify(a))
