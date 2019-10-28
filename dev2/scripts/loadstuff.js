@@ -176,8 +176,11 @@ async function loadInfo(){
 			timeInMin: timeInMin,
 			tags: JSON.stringify(tags)
 		},
+		stop: activeStop,
 		success: function(res)
 		{
+			if(this.stop != activeStop)
+				return;
 //			console.log(res);
             setNetworkStatus.OK();
 			if(res == "-1")
