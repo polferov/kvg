@@ -99,6 +99,23 @@ function toMin(time){
 }
 
 function init(){
+	var siteurl = new URL(location.href)
+	var urlStop = siteurl.searchParams.get("s");
+	if(urlStop){
+		activeStop = urlStop;
+		var state = {
+			url: location.pathname,
+			title: document.title.innerHTML
+		}
+		if(typeof(history))
+			if(typeof(history.pushState)){
+				history.pushState(state, state.title, state.url);
+				$("#uiStop").val(stops.filter((a) => a.stopNr == urlStop)[0].passengerName);
+				return;
+			}
+	}
+
+
 	var result = timeScheduleCheck();
 	if(result && settings.get('timeSchedule')){
 			activeStop = result;
@@ -171,6 +188,7 @@ var stopRefresh = setInterval(function(){
 async function loadInfo(){
 	$.get({
 		url: "php/infoUlBuilder.php",
+		timeout: 10000,
 		data: {
 			stop: activeStop,
 			timeInMin: timeInMin,
@@ -278,4 +296,35 @@ function acUlClick(e){
 //	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;
 }
 
+function share(){
+	var url_ = new URL(location.href);
+	var txt = document.title;
+	if(activeStop != null)
+		if(confirm("share with stop?")){
+			txt += " | Halltestelle: " + stops.filter((a) => a.stopNr == activeStop)[0].passengerName;
+			url_.href += "?s=" + activeStop;
+		}
+	if(navigator.share){
+		
+		navigator.share(
+			{
+				title: document.title,
+				url: url_.href,
+				text: txt
+			}
+		);
+	}
+	else {
+		if(confirm("\"share\" is not supported by this browser.\nCopy link to clipboard?"))
+			{
+				var inp = document.createElement("input");
+				inp.value = url_.href;
+				document.body.appendChild(inp);
+				inp.select()
+				document.execCommand("copy");
+				document.body.removeChild(inp);
+				alert("copied");
 
+			}
+	}
+}
