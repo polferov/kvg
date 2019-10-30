@@ -283,7 +283,11 @@ function filterStops(filter)
 		if(stops[i].passengerName.toLowerCase().indexOf(filter.toLowerCase()) > 0)
 			b.push(stops[i]);
 	
-	c.push(a);
+	c.push(a.filter(function(x){
+		return locstrg.get().filter((y) => y.passengerName == x.passengerName).length > 0;
+	}).concat(a.filter(function(x){
+		return !(locstrg.get().filter((y) => y.passengerName == x.passengerName).length > 0);
+	})));
 	c.push(b);
 	return c;
 }
