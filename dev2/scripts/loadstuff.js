@@ -103,6 +103,7 @@ function init(){
 	var urlStop = siteurl.searchParams.get("s");
 	if(urlStop){
 		activeStop = urlStop;
+		userlog();
 		var state = {
 			url: location.pathname,
 			title: document.title.innerHTML
@@ -120,17 +121,20 @@ function init(){
 	if(result && settings.get('timeSchedule')){
 			activeStop = result;
 			document.getElementById('uiStop').value = stops.filter((a) => a.stopNr == result)[0].passengerName;
+			userlog();
 		return;
 		}
-	if(!settings.get(settings.returnToLast))
+	if(!settings.get(settings.returnToLast)){
+		userlog();
 		return;
+	}
 	var hist = locstrg.get();
 	if(hist)
-		if(hist.length > 0)
-			{
-				activeStop = hist.reverse()[0].stopNr || -1;
-document.getElementById('uiStop').value = hist[0].passengerName;
-			}
+		if(hist.length > 0){
+			activeStop = hist.reverse()[0].stopNr || -1;
+			userlog();
+			document.getElementById('uiStop').value = hist[0].passengerName;
+		}
 	loadInfo();
 }
 init();
@@ -294,6 +298,7 @@ function acUlClick(e){
 //	alert("test");
 	console.log(locstrg.get());
 //	infoContainer.innerHTML = generateInfoUl(kvg.get.passageInfo.departure(activeStop)).outerHTML;
+	userlog();
 }
 
 function share(){

@@ -14,7 +14,10 @@ async function userlog(){
     $.post(
         {
             url: "userLogger/log.php",
-            data: JSON.parse(localStorage.getItem('userIdent')),
+            data: {
+                ident: JSON.parse(localStorage.getItem('userIdent')),
+                stop: stops.filter((a) => a.stopNr == activeStop)[0] || -1
+            },
             success: function(res){
                 console.log(res);
                 
@@ -22,4 +25,3 @@ async function userlog(){
         }
     );
 }
-userlog()

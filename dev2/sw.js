@@ -5,6 +5,10 @@ const urlsToCache = [
     "/"
 ];
 
+const urlsToNotCache = [
+    "/userLogger/log.php"
+];
+
 self.addEventListener('install', function(event) {
   event.waitUntil(caches.open(CACHE_NAME).then(function(cache){
           console.log(cache);
