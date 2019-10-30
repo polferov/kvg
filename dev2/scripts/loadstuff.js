@@ -52,7 +52,7 @@ var locstrg = {
 	name: "history",
 	count: 10,
 	get: function(){
-		return JSON.parse(localStorage.getItem(this.name));
+		return JSON.parse(localStorage.getItem(this.name)) || [];
 	},
 	
 	add: function(lmnt){
