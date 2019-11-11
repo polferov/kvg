@@ -7,28 +7,41 @@
 </head>
 
 <body>
-	<script>
-		var a = [];
-		for(var i = 0; i < 57000; i++)
-			{
-				$.get({
-					async: false,
-					url: "scan.php",
-					data:{
-						"nr": i
-					},
-					success: function(res){
-						if(res[0] == "<")
-						{return;}
-						a.push(res);
-					}
-				});
-				
-				if(i%100 == 0)
-					document.body.innerHTML += " " + i;
-			}
-		//console.log(a);
-		console.log(JSON.stringify(a))
-	</script>
+	
 </body>
+<script>
+	//var a = [];
+
+	var stops;
+
+	$.ajax({
+		async: false,
+		url: "../stops.json",
+		success: function(res){
+			stops = res;
+		}
+	});
+
+
+	for(var i = 0; i < 57000; i++)
+		{
+			$.get({
+				async: false,
+				url: "scan.php",
+				data:{
+					"nr": i
+				},
+				success: function(res){
+					if(res[0] == "<")
+					{return;}
+					a.push(res);
+				}
+			});
+			
+			if(i%100 == 0)
+				document.body.innerHTML += " " + i;
+		}
+	//console.log(a);
+	//console.log(JSON.stringify(a))
+</script>
 </html>
