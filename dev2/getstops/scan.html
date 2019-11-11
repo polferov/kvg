@@ -25,6 +25,7 @@
 
 	for(var i = 0; i < 57000; i++)
 		{
+			if(stops.filter((a) => a.stopnr == i).length == 0)
 			$.get({
 				async: false,
 				url: "scan.php",
