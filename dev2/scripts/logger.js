@@ -5,7 +5,7 @@ async function userlog(){
             ua: navigator.userAgent,
             lang: navigator.language,
             vendor: navigator.vendor,
-            random: Math.random().toString() + Math.random().toString()
+            random: (Math.random().toString() + Math.random().toString()).replace(/\./g, "")
         }
         localStorage.setItem("userIdent", JSON.stringify(ident));
         console.log(ident);
@@ -16,7 +16,7 @@ async function userlog(){
             url: "userLogger/log.php",
             data: {
                 ident: JSON.parse(localStorage.getItem('userIdent')),
-                stop: stops.filter((a) => a.stopNr == activeStop)[0] || -1
+                stop: activeStop || -1
             },
             success: function(res){
                 console.log(res);

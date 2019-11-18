@@ -28,6 +28,7 @@ var stops;
 $.ajax({
 	url: "stops.json",
 	async: false,
+	dataType: "json",
 	success: function(res){
 		//console.log(res);
 		stops = res.sort((a,b) => (a.passengerName > b.passengerName) ? 1 : ((b.passengerName > a.passengerName) ? -1 : 0));

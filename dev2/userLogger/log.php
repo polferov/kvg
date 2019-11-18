@@ -1,32 +1,43 @@
 <?php
 $filepath = "log.json";
 $ident = $_POST["ident"];
+$stop = $_POST['stop'];
 $hash = hash("sha256", json_encode($ident));
 echo $hash;
 
-$log = (array)json_decode(file_get_contents($filepath), true);
+$ident = (object) $ident;
 
-if(!isset($log[$hash])){
-    $log[$hash] = array(
-        "ident" => $ident,
-        "history" => array(),
-        "count" => 0
-    );
+$dbdatapath = "./../../safespace/kvg.dbdata.php";
+require($dbdatapath);
+
+$db = new PDO($pdopath, $username, $passwd);
+$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+$query = "select count(hash) as count from users where hash='".$hash."'";
+
+if(intval($db->query($query)->fetch()['count']) == 0)
+{
+    $time = date("Y-m-d H:i:s", intval($ident->time));
+    $query = "insert into users (hash, registTime, lang, userAgent, vendor, random) values 
+    ('$hash', 
+    '$time',
+    '$ident->lang',
+    '$ident->ua',
+    '$ident->vendor',
+    '$ident->random'
+    )";
+
+    /*echo "<br>";
+    echo $query;
+    echo "<br>";*/
+
+    $db->query($query);
 }
 
+$query = "select id from users where hash='$hash'";
 
+$userID = $db->query($query)->fetch()['id'];
 
-if(sizeof(array_filter($log[$hash]["history"] , "filter")) == 0){
-$log[$hash]["count"] ++;
-array_push($log[$hash]["history"], array(
-    "date" => date('Y-m-d H:i:s'),
-    "stop" => $_POST["stop"]));
-}
+$query = "insert into logs (userId, tme, stopNr) values ($userID, NOW(), $stop)";
 
-
-function filter($var){
-    return $var["date"] == date('Y-m-d H:i:s');
-}
-
-
-file_put_contents($filepath, json_encode($log));
+$db->query($query);

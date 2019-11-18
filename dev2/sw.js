@@ -21,6 +21,11 @@ self.addEventListener('install', function(event) {
 
 
 self.addEventListener("fetch", function(event){
+    for(var i = 0; i < urlsToNotCache.length; i++)
+        if(event.request.url.contains(urlsToNotCache[i]))
+            return;
+
+
     if(!navigator.onLine)
         {
             event.respondWith(caches.match(event.request).then(function(response){
