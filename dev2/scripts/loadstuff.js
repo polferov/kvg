@@ -62,12 +62,12 @@ var locstrg = {
 			curr = [];
 		curr = curr.filter((l) => l.stopNr != lmnt.stopNr);
 		curr.push(lmnt);
-		if(curr.length > this.count)
+		/*if(curr.length > this.count)
 			{
 				curr = curr.reverse();
 				curr.length = this.count;
 				curr = curr.reverse();
-			}
+			}*/
 		return this.set(curr);
 	},
 	
@@ -268,7 +268,7 @@ function filterStops(filter)
 	console.log(filter);
 	var inp = document.getElementById('uiStop');
 	if(filter == "" || (inp.selectionStart == 0 && inp.selectionEnd == inp.value.length))
-		return [locstrg.get().reverse(), null] || [];
+		return [locstrg.get().reverse().slice(0, locstrg.count), null] || [];
 	
 //	console.log(filter);
 	
