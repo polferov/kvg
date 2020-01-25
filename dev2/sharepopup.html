@@ -20,17 +20,17 @@
 </style>
 
 <script>
-	document.querySelector('#sharebtncontainer #app').onclick = function () {
+	document.querySelector('#sharebtncontainer #appstop').onclick = function () {
 		var shareLink = new URL(window.location.href);
 		//console.log("activeStop");
+		if(activeStop)
 			shareLink.searchParams.set('s', activeStop);
 		var txt = document.title;
 		txt += " | Halltestelle: " + stops.filter((a) => a.stopNr == activeStop)[0].passengerName;
 		attemptShare(shareLink.href, txt);
 	};
-	document.querySelector('#sharebtncontainer #appstop').onclick = function () {
+	document.querySelector('#sharebtncontainer #app').onclick = function () {
 		var shareLink = new URL(window.location.href);
-		shareLink.searchParams.set('s', activeStop);
 		var txt = document.title;
 		attemptShare(shareLink.href, txt);
 	}
