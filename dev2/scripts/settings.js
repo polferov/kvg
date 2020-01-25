@@ -30,6 +30,10 @@ if(document.getElementById('dark').checked){
 	document.getElementById('amodark').style.display = "flex";
 }
 
+document.getElementById('dark').addEventListener('change', function(){
+	location.href = location;
+});
+
 
 
 
