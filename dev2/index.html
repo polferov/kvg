@@ -17,10 +17,23 @@
 	<link rel="stylesheet" href="style/info.css">
 <!--	<link rel="manifest" id="manifest">-->
 	<link rel="manifest" href="webapstuff/manifest.json">
-<!--	<link rel="manifest" href="https://kirillkiel.github.io/kvg/dev2/webapstuff/manifest.json">-->
+<!--	<link rel="manifest" href="https://kirillkiel.github.io/kvg/dev2/webapstuff/manifest.json">
+	<meta name="theme-color" content="#0ff">-->
+	<script src="scripts/settingsclass.js"></script>
+	
+	<script>
+		if(settings.get(settings.darkmode)){
+			if(settings.get(settings.amodarkmode)){
+				document.write('<meta name="theme-color" content="#000">');
+			}else
+				document.write('<meta name="theme-color" content="#202020">');
+		}
+	</script>
 </head>
 
 <body id="bdy">
+	
+	<div id="notificationContainer"></div>
     
     <h4 id="backToNormal" style="padding: 0; margin: 5px; display: none;"><a href=".." style="padding: 1px; margin: 0;">back to normal</a></h4>
 
@@ -36,8 +49,8 @@
 	<div id="networkInfo">
 		<span>Network Status:</span>
 		<span id="networkStatus">
-			<img src="icons/ok.png" id="networkOK">
-			<img src="icons/fail.png" id="networkErr">
+			<img alt="OK" src="icons/ok.png" id="networkOK">
+			<img alt="Err" src="icons/fail.png" id="networkErr">
 		</span>
 		<span>
 			<span id="share"><img alt="share" onclick="share()" src="icons/share.png"></span>
@@ -48,7 +61,6 @@
 	<div id="infoContainer"></div>
 
 <!--	<script src="scripts/stops.js"></script>-->
-	<script src="scripts/settingsclass.js"></script>
 	<script src="style/style.js"></script>
 	<script src="scripts/loadstuff.js"></script>
 

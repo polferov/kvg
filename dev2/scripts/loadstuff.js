@@ -307,7 +307,7 @@ function acUlClick(e){
 }
 
 function share(){
-	var url_ = new URL(location.href);
+	/*var url_ = new URL(location.href);
 	var txt = document.title;
 	if(activeStop != null)
 		if(confirm("share with stop?")){
@@ -336,5 +336,11 @@ function share(){
 				alert("copied");
 
 			}
-	}
+	}*/
+	
+	
+	var notcon = document.getElementById('notificationContainer');
+	$(notcon).load('sharepopup.html');
+	notcon.style.display = "block";
+	
 }

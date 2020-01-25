@@ -24,7 +24,16 @@ cursor: pointer;
 
 
 
-
+#notificationContainer {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #ddd;
+	padding: 20px;
+	border-radius: 10px;
+}
 
 
 /****************************************************************************************
@@ -45,6 +54,15 @@ darkmode
 	-webkit-filter: invert(1);
 }
 
+.dark #notificationContainer{
+	background: #202020;
+}
+
 .amodark#bdy {
 	background-color: #000;
+}
+
+.amodark #notificationContainer{
+	background: #000;
+	border: solid 1px #444;
 }
