@@ -5,6 +5,7 @@ require_once $dbdatapath;
 
 $db = new PDO($pdopath, $username, $passwd);
 
+
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 echo json_encode($db->query('select * from stops')->fetchAll());

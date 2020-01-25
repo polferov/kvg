@@ -12,6 +12,8 @@ var settings = {
 	timeScheduleActive: "timeScheduleActive",
 	timeSchedule: "timeSchedule",
 	timeScheduleLastState: "timeScheduleLastState",
+	darkmode: "darkmode",
+	amodarkmode: "amodarkmode",
 	
 	get: function (property) {
 		if(!property)

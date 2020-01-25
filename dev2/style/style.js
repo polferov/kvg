@@ -61,3 +61,10 @@ if(settings.get(settings.fontSizeMultiplikatorSearchAutocomplete))
 if(settings.get(settings.fontSizeMultiplikatorInfo))
 	document.getElementById('infoContainer').style.fontSize = settings.get(settings.fontSizeMultiplikatorInfo) + "em";
 
+
+if(settings.get(settings.darkmode)){
+	var bdy = document.getElementById('bdy');
+	bdy.classList.add('dark');
+	if(settings.get(settings.amodarkmode))
+		bdy.classList.add('amodark');
+}

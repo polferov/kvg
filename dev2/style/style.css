@@ -21,3 +21,30 @@ height: 24px;
 padding: 0;
 cursor: pointer;
 }
+
+
+
+
+
+
+/****************************************************************************************
+darkmode
+*****************************************************************************************/
+
+.dark * {
+	font-family: Arial;
+	color: #fff
+}
+
+.dark#bdy {
+	background: #222;
+}
+
+.dark #share, .dark #settings {
+	filter: invert(1);
+	-webkit-filter: invert(1);
+}
+
+.amodark#bdy {
+	background-color: #000;
+}

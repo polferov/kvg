@@ -26,6 +26,10 @@ function nrOnChange(e){
 	
 }
 
+if(document.getElementById('dark').checked){
+	document.getElementById('amodark').style.display = "flex";
+}
+
 
 
 

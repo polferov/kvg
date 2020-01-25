@@ -35,7 +35,7 @@
 }
 
 #uiStopSearch ul li:hover {
-	background-color: #a00;
+	background-color: #a00 !important;
 	color: #fff;
 }
 
@@ -45,4 +45,43 @@
 
 #uiStopSearch #autocomplete {
 	display: none;
+}
+
+
+
+
+
+/****************************************************************************************
+darkmode
+*****************************************************************************************/
+
+
+.dark #uiStopSearch input {
+	background: #333;
+	border: solid #444;
+}
+
+.dark #uiStopSearch ul li {
+	background: #383838;
+	color: #FFFFFF;
+}
+
+.dark #uiStopSearch ul {
+	background: #303030;
+	border-color: #444;
+}
+
+
+.amodark #uiStopSearch input {
+	background: #000;
+	border: solid #222;
+}
+
+.amodark #uiStopSearch ul li {
+	background: #000;
+}
+
+.amodark #uiStopSearch ul {
+	background: #181818;
+	border-color: #222;
 }

@@ -8,7 +8,7 @@
 }
 
 #infoUL {
-	background-color: #ddd;
+	background-color: inherit;
 	padding: 0;
 }
 
@@ -19,7 +19,9 @@
 #infoUL li {
 	margin: 0;
 	display: block;
-	background-color: #fff;
+	background-color: inherit;
+	margin-bottom: 2px;
+	border-bottom: solid 2px #ddd;
 }
 
 #infoUL .busTitle {
@@ -46,4 +48,15 @@
 	margin: 0px;
 	padding: 0px;
 	margin-left: 5px !important;
+}
+
+
+
+
+/****************************************************************************************
+darkmode
+*****************************************************************************************/
+
+.dark #infoUL li {
+	border-color: #181818;
 }
