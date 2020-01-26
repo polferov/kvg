@@ -83,7 +83,7 @@ function createLI($obj)
 	$html .= '<div class="timeContainer">';
 	$html .= '<span>'.$time.'</span>';
 	$td = calcTimeDif($obj->plannedTime, $obj->actualTime);
-	if($td == 0)
+	if($td == 0 || $obj->actualTime = null || !isset($obj->actualTime))
 		$td = '';
 	$html .= '<span>'.((String) $td).'</span>';
 	$html .= "</div>";
