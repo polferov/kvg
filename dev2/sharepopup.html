@@ -59,5 +59,16 @@
 		document.getElementById('notificationContainer').style.display = "none";
 		document.getElementById('notificationContainer').innerHTML = '';
 	}
+	
+	
+	document.addEventListener('click', function(e){
+		//console.log(e);
+		var notcon = document.getElementById('notificationContainer');
+		//console.log(notcon.contains(e.target));
+		if(!notcon.contains(e.target) && notcon.innerHTML != ''){
+			notcon.style.display = 'none';
+			notcon.innerHTML = '';
+		}
+	});
 
 </script>
