@@ -137,7 +137,7 @@ input:checked + .slider:before {
 	background: #222;
 }
 
-.dark p, .dark span{
+.dark p, .dark span, .dark h2{
 	color: #fff;
 }
 
