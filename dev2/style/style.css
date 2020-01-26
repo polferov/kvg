@@ -15,7 +15,7 @@ font-family: Arial;
 	width: 24px;
 }
 
-#settings *, #share * {
+#settings *, #share *, #viewDataSource * {
 margin: 0;
 height: 24px;
 padding: 0;

@@ -344,3 +344,11 @@ function share(){
 	notcon.style.display = "block";
 	
 }
+
+
+function viewDataSource(){
+	var notcon = document.getElementById('notificationContainer');
+	$(notcon).load('dataSourceInfo.html');
+	notcon.style.display = "block";
+	
+}

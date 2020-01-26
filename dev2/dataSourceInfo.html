@@ -1,0 +1,63 @@
+<h3 align="center" style="color: auto">Data Source Info</h3>
+<p align="center">Here you can directly access the sources for the shown data</p>
+
+<div id="srcbtncontainer">
+	<button lnk="https://www.kvg-kiel.de//internetservice/services/passageInfo/stopPassages/stop?mode=departure&stop=" add="activeStop">Current Stop Live Departure Data</button>
+	
+	<button add="activeStop" lnk="https://www.kvg-kiel.de/internetservice/services/stopInfo/stop?stop=">Current Stop Data</button>
+</div>
+
+<div id="activeStopData">
+	<p>Name: <span id="activeStopName"></span></p>
+	<p>StopNr: <span id="activeStopNr"></span></p>
+	<p>ID: <span id="activeStopID"></span></p>
+</div>
+
+<style>
+	#srcbtncontainer{
+		display: flex;
+		justify-content: space-between;
+	}
+	#srcbtncontainer button{
+		border: none;
+		background: rgba(128, 128, 128, 0.3);
+		width: 40%;
+		cursor: pointer;
+	}
+</style>
+
+<script>
+	
+	document.addEventListener('click', function(e){
+		//console.log(e);
+		var notcon = document.getElementById('notificationContainer');
+		//console.log(notcon.contains(e.target));
+		if(!notcon.contains(e.target) && notcon.innerHTML != ''){
+			notcon.style.display = 'none';
+			notcon.innerHTML = '';
+		}
+		
+		
+		if(document.getElementById('srcbtncontainer').contains(e.target)){
+			if(e.target.nodeName == 'BUTTON'){
+				var lnk = e.target.getAttribute('lnk');
+				switch(e.target.getAttribute('add')){
+					case 'activeStop':
+						lnk += activeStop;
+					default:
+						null;
+				}
+				window.open(lnk);
+			}
+		}
+	});
+	
+	
+	
+	document.querySelector('#activeStopName').innerHTML = stops.filter((a) => a.stopNr == activeStop)[0].passengerName;
+	
+	document.querySelector('#activeStopNr').innerHTML = activeStop;
+	
+	document.querySelector('#activeStopID').innerHTML = stops.filter((a) => a.stopNr = activeStop)[0].id;
+
+</script>
