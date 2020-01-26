@@ -49,7 +49,7 @@ darkmode
 	background: #222;
 }
 
-.dark #share, .dark #settings {
+.dark #share, .dark #settings, .dark #viewDataSource {
 	filter: invert(1);
 	-webkit-filter: invert(1);
 }
