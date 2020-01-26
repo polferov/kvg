@@ -6,7 +6,8 @@ const urlsToCache = [
 ];
 
 const urlsToNotCache = [
-    "/userLogger/log.php"
+    "/userLogger/log.php",
+    "/getstops/addstop.php"
 ];
 
 self.addEventListener('install', function(event) {
