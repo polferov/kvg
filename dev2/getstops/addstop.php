@@ -109,7 +109,7 @@ foreach($stops as $stop){
 
     if($pn != $resp->passengerName){
         $query = "update stops set passengerName='{$resp->passengerName}' where stopNr='$stopnr'";
-		echo $query;
+		//echo $query;
         $db->query($query);
 		echo "{$tabspace}{$stopnr};{$resp->id}<br>{$tabspace}{$tabspace}$pn to {$resp->passengerName}<br><br>";
     }
