@@ -34,6 +34,8 @@ $stops = array();
 
 foreach($doc->getElementsByTagName('li') as $node)
 {
+    if(!$node->getAttribute('stop'))
+        continue;
 	$resp = file_get_contents($kvgInfo . $node->getAttribute('stop'));
 	$resp = json_decode($resp);
 	
@@ -58,9 +60,6 @@ foreach($doc->getElementsByTagName('li') as $node)
 
 
 
-
-
-
 echo "server response:<br>";
 $tabspace = "&nbsp&nbsp&nbsp&nbsp";
 foreach($stops as $stop){
@@ -68,34 +67,50 @@ foreach($stops as $stop){
 }
 echo "<br>added stops:<br>";
 
+
+
+//var_dump($stops);
+
 foreach($stops as $stop){
-	$stop = $node->getAttribute('stop');
+    //var_dump($stop);
+    //var_dump($node);
+	$stopnr = $stop['stopNr'];
     
-    $query = "select count(stopNr) as count from stops where stopNr='".$stop."'";
+    if(!$stopnr)
+        continue;
+    
+    $query = "select count(stopNr) as count from stops where stopNr='".$stopnr."'";
 
     if(intval($db->query($query)->fetch()['count']) == 0){
-        $resp = file_get_contents($kvgInfo.$stop);
+        $resp = file_get_contents($kvgInfo.$stopnr);
         $resp = json_decode($resp);
-        $query = "insert into stops (stopnr, id, passengername) values ($stop, '$resp->id', '$resp->passengerName')";
+        $query = "insert into stops (stopnr, id, passengername) values ($stopnr, '$resp->id', '$resp->passengerName')";
         $db->query($query);
-		echo "{$tabspace}{$stop};{$resp->id}<br>{$tabspace}{$tabspace}{$resp->passengerName}<br><br>";
+		echo "{$tabspace}{$stopnr};{$resp->id}<br>{$tabspace}{$tabspace}{$resp->passengerName}<br><br>";
     }
 }
 
 
 echo '<br>updated stops:<br>';
 foreach($stops as $stop){
-	$stop = $node->getAttribute('stop');
+	$stopnr = $stop['stopNr'];
     
-    $query = "select passengerName as pn from stops where stopNr='".$stop."'";
+    if(!$stopnr)
+        continue;
+    
+    $query = "select passengerName as pn from stops where stopNr='".$stopnr."'";
 	
-    $resp = file_get_contents($kvgInfo.$stop);
+    $resp = file_get_contents($kvgInfo.$stopnr);
     $resp = json_decode($resp);
+    
+    $pn = $db->query($query)->fetch()['pn'];
+    
+    //echo $pn;
 
-    if($db->query($query)->fetch()['pn'] != $resp->passengerName){
-        $query = "update stops set passengerName='{$resp->passengerName}' where stopNr='$stop'";
+    if($pn != $resp->passengerName){
+        $query = "update stops set passengerName='{$resp->passengerName}' where stopNr='$stopnr'";
 		echo $query;
         $db->query($query);
-		echo "{$tabspace}{$stop};{$resp->id}<br>{$tabspace}{$tabspace}{$resp->passengerName}<br><br>";
+		echo "{$tabspace}{$stopnr};{$resp->id}<br>{$tabspace}{$tabspace}$pn to {$resp->passengerName}<br><br>";
     }
 }
