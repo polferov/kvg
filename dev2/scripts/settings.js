@@ -33,6 +33,9 @@ if(document.getElementById('dark').checked){
 document.getElementById('dark').addEventListener('change', function(){
 	location.href = location;
 });
+document.getElementById('amodarkmode').addEventListener('change', function(){
+	location.href = location;
+});
 
 
 
@@ -46,4 +49,20 @@ function clearStorage() {
 	else
 		alert('canceled')
 	
+}
+
+
+
+if(settings.get(settings.darkmode)){
+	var bdy = document.getElementById('bdy');
+	//var tc = document.getElementById('theme-color');
+	//var tce = document.createElement('meta');
+	//tce.setAttribute("name", "theme-color");
+	bdy.classList.add('dark');
+	if(settings.get(settings.amodarkmode)){
+		bdy.classList.add('amodark');
+		//tce.setAttribute("content", "#000");
+	}//else
+		//tce.setAttribute("content", "#202020");
+	//document.head.appendChild(tce);
 }

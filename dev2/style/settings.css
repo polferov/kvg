@@ -130,3 +130,17 @@ input:checked + .slider:before {
 	justify-content: space-between;
 	margin: 10px;
 }
+
+
+
+.dark#bdy{
+	background: #222;
+}
+
+.dark p, .dark span{
+	color: #fff;
+}
+
+.amodark#bdy{
+	background: #000;
+}
