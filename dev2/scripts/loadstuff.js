@@ -221,8 +221,8 @@ async function loadInfo(){
 			document.getElementById('infoUL').classList.add('outdated');
 			if(!navigator.onLine)
 				setNetworkStatus.Err();
-			else
-				infoContainer.innerHTML = infoContainer.innerHTML = e.statusText;
+			//else
+			//	infoContainer.innerHTML = infoContainer.innerHTML = e.statusText;
 		}
 	});
 }
