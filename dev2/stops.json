@@ -2,6 +2,7 @@
 $dbdatapath = "/var/safespace/kvg.dbdata.php";
 require_once $dbdatapath;
 
+header("Content-Type: text/json");
 
 $db = new PDO($pdopath, $username, $passwd);
 
