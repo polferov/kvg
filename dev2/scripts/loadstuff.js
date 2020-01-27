@@ -216,6 +216,9 @@ async function loadInfo(){
 				infoContainer.innerHTML = res;
 		},
 		error: function(e){
+			console.log(e);
+			document.getElementById('lastUpdate').classList.add('outdated');
+			document.getElementById('infoUL').classList.add('outdated');
 			if(!navigator.onLine)
 				setNetworkStatus.Err();
 			else

@@ -55,7 +55,8 @@ function createTags($tags)
 
 function createLI($obj)
 {
-	$html = "<li>";
+	$html = "";
+	$html .= "<li>";
 	$html .= "<div>";
 	$html .= '<p class="busTitle">'.$obj->patternText.' --> '.$obj->direction.'</p>';
 	
@@ -81,11 +82,11 @@ function createLI($obj)
 //	echo $_GET['timeInMin'];
 	
 	$html .= '<div class="timeContainer">';
-	$html .= '<span>'.$time.'</span>';
+	$html .= '<span class="countdown">'.$time.'</span>';
 	$td = calcTimeDif($obj->plannedTime, $obj->actualTime);
 	if($td == 0 || $obj->actualTime = null || !isset($obj->actualTime))
 		$td = '';
-	$html .= '<span>'.((String) $td).'</span>';
+	$html .= '<span class="delay">'.((String) $td).'</span>';
 	$html .= "</div>";
 	
 	$html .= "</div>";
@@ -138,10 +139,17 @@ function createLI($obj)
 
 function generateInfoUl($Obj){
 //	console.log(Obj);
+	//time stamp
+	$html = "";
+	$html .= '<div class="lastUpdate" id="lastUpdate">';
+	$html .= "Last update at: ". date("h:i:s");
+	$html .= '</div>';
+	
+	
 	if(!isset($Obj->actual[0]))
 			return('<p>no current Information</p>');
 	
-	$html = '<ul id="infoUL">';
+	$html .= '<ul id="infoUL">';
 	
 	foreach($Obj->actual as $i)
 	{

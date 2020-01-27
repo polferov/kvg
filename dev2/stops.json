@@ -4,7 +4,7 @@ require_once $dbdatapath;
 
 header("Content-Type: text/json");
 
-$db = new PDO($pdopath, $username, $passwd);
+//$db = new PDO($pdopath, $username, $passwd);
 
 
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);

@@ -51,6 +51,25 @@
 }
 
 
+.lastUpdate {
+	display: none;
+	border-bottom: solid 1px #888;
+}
+
+
+.outdated.lastUpdate {
+	display: block;
+}
+
+.outdated .timeContainer .countdown{
+	display: none;
+}
+.outdated .timeContainer{
+	justify-content: flex-end;
+}
+
+
+
 
 
 /****************************************************************************************
