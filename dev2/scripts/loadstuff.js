@@ -151,8 +151,8 @@ function contentOf(_url){
 		error: function(e){console.log(e); 
 			if(!navigator.onLine)
 				setNetworkStatus.Err();
-			else
-				infoContainer.innerHTML = infoContainer.innerHTML = e.statusText;
+			//else
+			//	infoContainer.innerHTML = infoContainer.innerHTML = e.statusText;
 						  }
 	}).responseJSON;
 	//console.log(c, _url);
