@@ -71,6 +71,11 @@ darkmode
 	border-color: #444;
 }
 
+.dark #uiStop::selection{
+	color: #fff;
+	background: #ddd;
+}
+
 
 .amodark #uiStopSearch input {
 	background: #000;
