@@ -7,7 +7,8 @@ const urlsToCache = [
 
 const urlsToNotCache = [
     "/userLogger/log.php",
-    "/getstops/addstop.php"
+    "/getstops/addstop.php",
+	"/infoUlBuilder.php"
 ];
 
 self.addEventListener('install', function(event) {
