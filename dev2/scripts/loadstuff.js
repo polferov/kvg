@@ -27,16 +27,18 @@ var kvg = {
 var stops;
 $.ajax({
 	url: "stops.json",
-	async: false,
+	//async: false,
 	dataType: "json",
 	success: function(res){
 		//console.log(res);
 		stops = res.sort((a,b) => (a.passengerName > b.passengerName) ? 1 : ((b.passengerName > a.passengerName) ? -1 : 0));
 		console.log(stops);
 		setNetworkStatus.OK();
+		init();
 	},
 	error: function(e){
 		alert("Something went wrong");
+		init();
 		console.log(e);
 		if(!navigator.onLine)
 				setNetworkStatus.Err();
@@ -138,7 +140,7 @@ function init(){
 		}
 	loadInfo();
 }
-init();
+//init();
 
 function contentOf(_url){
 //	return $.getJSON(gsc + encodeURIComponent(_url));
