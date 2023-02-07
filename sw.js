@@ -6,7 +6,6 @@ const urlsToCache = [
 ];
 
 const urlsToNotCache = [
-    "/userLogger/log.php",
     "/getstops/addstop.php",
 	"/infoUlBuilder.php"
 ];
