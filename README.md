@@ -1,3 +1,5 @@
+# there is a new kvg project [here](https://github.com/polferov/kvg2)
+
 # KVG
 making kvg pwa
 
